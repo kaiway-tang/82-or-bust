@@ -5,6 +5,7 @@ using UnityEngine;
 public class GunEnemy : SmartEnemy
 {
     [SerializeField] Transform gunTrfm;
+    [SerializeField] GameObject bullet;
     // Start is called before the first frame update
     new void Start()
     {
@@ -29,8 +30,19 @@ public class GunEnemy : SmartEnemy
 
     }
 
+    int cooldown;
     void HandleAiming()
     {
         Tools.LerpRotation(gunTrfm, player.trfm.position, .2f);
+
+        cooldown--;
+
+        if (cooldown == 75) { Instantiate(GameManager.exclamation, trfm.position, Quaternion.identity); }
+
+        if (cooldown < 50 && cooldown % 10 == 0)
+        {
+            Instantiate(bullet, gunTrfm.position, gunTrfm.rotation);
+            if (cooldown < 1) { cooldown = Random.Range(100, 125); }
+        }
     }
 }

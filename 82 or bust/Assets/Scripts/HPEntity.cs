@@ -25,7 +25,7 @@ public class HPEntity : MonoBehaviour
     public const int ALIVE = 0, DEAD = 1, IGNORED = 2;
     public int TakeDamage(int amount, int sourceID)
     {
-        if (sourceID == entityID) { return IGNORED; }
+        if (sourceID != 0 && sourceID == entityID) { return IGNORED; }
 
         HP -= amount;
 

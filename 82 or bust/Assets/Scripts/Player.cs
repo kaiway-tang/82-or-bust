@@ -13,7 +13,8 @@ public class Player : MobileEntity
     bool hasDJump;
 
     int mana;
-    [SerializeField] int dashPower, dashMovementDuration, dashIFrameDuration, dashExitVelocity;
+    [SerializeField] int dashPower, dashMovementDuration, dashIFrameDuration;
+    [SerializeField] float dashExitVelocity;
     [SerializeField] Collider2D hurtbox;
 
     Vector3 mousePos;
@@ -45,7 +46,7 @@ public class Player : MobileEntity
     {
         base.FixedUpdate();
 
-        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + Vector3.forward * 10;
 
         HandleFacing();
         HandleFriction();
@@ -56,27 +57,19 @@ public class Player : MobileEntity
 
     #region MOVEMENT
 
-    int movementLock;
-    [SerializeField] bool lheld, rheld, grounded;
+    [SerializeField] int movementLock;
 
     void HandleHorizontalMovement()
     {
         if (movementLock > 0) { return; }
 
-        lheld = In.LeftHeld();
-        rheld = In.RightHeld();
-        grounded = IsTouchingGround();
-
         bool isMoving = false;
         if (In.LeftHeld())
         {
-            Debug.Log("left");
             if (!In.RightHeld())
             {
-                Debug.Log("not right");
                 if (IsTouchingGround())
                 {
-                    Debug.Log("grounded");
                     AddXVelocity(-groundedAcceleration, -maxSpeed);
                     isMoving = true;
                 }
@@ -157,6 +150,7 @@ public class Player : MobileEntity
             hurtbox.enabled = false;
 
             Vector3 dashVect = (mousePos - trfm.position).normalized * dashPower;
+            Debug.Log("dashvect" + (mousePos - trfm.position).normalized);
             Vector3 rbVect = rb.velocity;
             if ((dashVect + rbVect).sqrMagnitude > dashVect.sqrMagnitude)
             {
@@ -166,7 +160,9 @@ public class Player : MobileEntity
             {
                 rb.velocity = dashVect;
             }
-            movementLock++;
+            rb.velocity = dashVect;
+
+            if (dashMovementTmr < 1) { movementLock++; }            
 
             mana -= 25;
         }
@@ -175,10 +171,11 @@ public class Player : MobileEntity
     {
         if (dashMovementTmr > 0)
         {
+            ApplyDirectionalFriction((dashPower - dashExitVelocity)/dashMovementDuration);
             dashMovementTmr--;
             if (dashMovementTmr == 0)
             {
-                rb.velocity = rb.velocity * dashExitVelocity / rb.velocity.magnitude;
+                //rb.velocity = rb.velocity * dashExitVelocity / rb.velocity.magnitude;
                 rb.gravityScale = 6;
                 movementLock--;
             }

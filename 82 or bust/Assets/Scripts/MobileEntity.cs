@@ -213,6 +213,11 @@ public class MobileEntity : HPEntity
         }
     }
 
+    public void ApplyDirectionalDrag(float percentage)
+    {
+        rb.velocity = rb.velocity * percentage;
+    }
+
     protected void SetVelocity(float x, float y)
     {
         vect2.x = x; vect2.y = y;
