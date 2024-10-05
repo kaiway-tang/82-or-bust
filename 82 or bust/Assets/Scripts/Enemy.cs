@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Enemy : MobileEntity
 {
+    // player transform: GameManager.playerTrfm  OR  player.trfm
+
+
+
     [SerializeField] float targetRange;
 
     public static Player player;
@@ -21,11 +25,6 @@ public class Enemy : MobileEntity
         base.FixedUpdate();
 
         HandlePlayerTrackingUpdates();
-    }
-
-    void Reinforce(float range)
-    {
-
     }
 
     #region PLAYER_TRACKING

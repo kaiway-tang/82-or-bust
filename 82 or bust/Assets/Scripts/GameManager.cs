@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
 {
     static int assignID;
     public static GameManager self;
+    public static Player player;
+    public static Transform playerTrfm;
 
     private void Start()
     {
