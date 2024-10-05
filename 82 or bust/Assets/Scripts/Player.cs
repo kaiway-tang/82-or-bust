@@ -12,24 +12,33 @@ public class Player : MobileEntity
     [SerializeField] float jumpPower, doubleJumpPower;
     bool hasDJump;
 
-    Vector2 mousePos;
+    int mana;
+    [SerializeField] int dashPower, dashMovementDuration, dashIFrameDuration, dashExitVelocity;
+    [SerializeField] Collider2D hurtbox;
+
+    Vector3 mousePos;
     [SerializeField] PosTracker posTracker;
 
     private void Awake()
     {
         trfm = transform;
         self = GetComponent<Player>();
+        Enemy.player = self;
         GameManager.playerPosTracker = posTracker;
+        Tools.playerTrfm = trfm;
     }
 
     new void Start()
     {
         base.Start();
+
+        mana = 999999;
     }
 
     private void Update()
     {
         HandleJump();
+        DashRollCast();
     }
 
     new void FixedUpdate()
@@ -41,14 +50,19 @@ public class Player : MobileEntity
         HandleFacing();
         HandleFriction();
         HandleHorizontalMovement();
+
+        HandleDashRoll();
     }
 
     #region MOVEMENT
 
+    int movementLock;
     [SerializeField] bool lheld, rheld, grounded;
 
     void HandleHorizontalMovement()
     {
+        if (movementLock > 0) { return; }
+
         lheld = In.LeftHeld();
         rheld = In.RightHeld();
         grounded = IsTouchingGround();
@@ -104,6 +118,7 @@ public class Player : MobileEntity
 
     void HandleFriction()
     {
+        if (dashMovementTmr > 0) { return; }
         if (IsTouchingGround())
         {
             ApplyXFriction(groundedFriction);
@@ -128,4 +143,56 @@ public class Player : MobileEntity
             FaceLeft();
         }
     }
+
+    #region ABILITIES
+
+    int dashMovementTmr, dashIFrameTmr;
+    void DashRollCast()
+    {
+        if (In.DashRollPressed() && mana >= 25)
+        {
+            rb.gravityScale = 0;
+            dashMovementTmr = dashMovementDuration;
+            dashIFrameTmr = dashIFrameDuration;
+            hurtbox.enabled = false;
+
+            Vector3 dashVect = (mousePos - trfm.position).normalized * dashPower;
+            Vector3 rbVect = rb.velocity;
+            if ((dashVect + rbVect).sqrMagnitude > dashVect.sqrMagnitude)
+            {
+                rb.velocity = dashVect + rbVect;
+            }
+            else
+            {
+                rb.velocity = dashVect;
+            }
+            movementLock++;
+
+            mana -= 25;
+        }
+    }
+    void HandleDashRoll()
+    {
+        if (dashMovementTmr > 0)
+        {
+            dashMovementTmr--;
+            if (dashMovementTmr == 0)
+            {
+                rb.velocity = rb.velocity * dashExitVelocity / rb.velocity.magnitude;
+                rb.gravityScale = 6;
+                movementLock--;
+            }
+        }
+
+        if (dashIFrameTmr > 0)
+        {
+            dashIFrameTmr--;
+            if (dashIFrameTmr == 0)
+            {
+                hurtbox.enabled = true;
+            }
+        }
+    }
+
+    #endregion
 }

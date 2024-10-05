@@ -5,7 +5,11 @@ using UnityEngine;
 public class In : MonoBehaviour
 {
     public static KeyCode JumpKey, JumpKey1, UpKey, UpKey1, DownKey, DownKey1, LeftKey, LeftKey1, RightKey, RightKey1;
-    public static KeyCode AttackKey, AttackKey1, DashRollKey, DashRollKey1, CastKey, CastKey1, SoulKey, SoulKey1;
+    public static KeyCode
+        SlashKey, SlashKey1,
+        DSlashKey, DSlashKey1,
+        DashRollKey, DashRollKey1;
+
 
     static bool firstLoad;
 
@@ -28,18 +32,8 @@ public class In : MonoBehaviour
         RightKey = KeyCode.D;
         RightKey1 = KeyCode.RightArrow;
 
-
-        AttackKey = KeyCode.U;
-        AttackKey1 = KeyCode.V;
-
-        DashRollKey = KeyCode.I;
-        DashRollKey1 = KeyCode.C;
-
-        CastKey = KeyCode.O;
-        CastKey1 = KeyCode.X;
-
-        SoulKey = KeyCode.P;
-        SoulKey1 = KeyCode.Z;
+        DashRollKey = KeyCode.LeftShift;
+        DashRollKey1 = KeyCode.RightShift;
 
         firstLoad = true;
     }
@@ -125,17 +119,30 @@ public class In : MonoBehaviour
         return Input.GetKeyDown(RightKey) || Input.GetKeyDown(RightKey1);
     }
 
-    public static bool AttackPressed()
+    public static bool SlashPressed()
     {
-        return Input.GetKeyDown(AttackKey) || Input.GetKeyDown(AttackKey1);
+        return Input.GetMouseButtonDown(0);
     }
-    public static bool AttackHeld()
+    public static bool SlashHeld()
     {
-        return Input.GetKey(AttackKey) || Input.GetKey(AttackKey1);
+        return Input.GetMouseButton(0);
     }
-    public static bool AttackReleased()
+    public static bool SlashReleased()
     {
-        return Input.GetKeyUp(AttackKey) || Input.GetKeyUp(AttackKey1);
+        return Input.GetMouseButtonUp(0);
+    }
+
+    public static bool DSlashPressed()
+    {
+        return Input.GetMouseButtonDown(1);
+    }
+    public static bool DSlashHeld()
+    {
+        return Input.GetMouseButton(1);
+    }
+    public static bool DSlashReleased()
+    {
+        return Input.GetMouseButtonUp(1);
     }
 
     public static bool DashRollPressed()
@@ -145,21 +152,6 @@ public class In : MonoBehaviour
     public static bool DashRollHeld()
     {
         return Input.GetKey(DashRollKey) || Input.GetKey(DashRollKey1);
-    }
-
-
-    public static bool CastPressed()
-    {
-        return Input.GetKeyDown(CastKey) || Input.GetKeyDown(CastKey1);
-    }
-    public static bool CastHeld()
-    {
-        return Input.GetKey(CastKey) || Input.GetKey(CastKey1);
-    }
-
-    public static bool SoulPressed()
-    {
-        return Input.GetKeyDown(SoulKey) || Input.GetKeyDown(SoulKey1);
     }
 
     static Vector2 vect2;

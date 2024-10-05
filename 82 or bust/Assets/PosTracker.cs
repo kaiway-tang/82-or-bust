@@ -22,7 +22,7 @@ public class PosTracker : MonoBehaviour
         else
         {
             StorePosition();
-            timer = 10;
+            timer = 5;
         }
     }
 
@@ -34,9 +34,15 @@ public class PosTracker : MonoBehaviour
 
     public Vector3 GetPredictedPosition(int ticks)
     {
+        return trfm.position;
+
         ticks = Mathf.Min(ticks, 200);
         int backIndex = ptr - ticks / 10;
         if (backIndex < 0) { backIndex += 20; }
-        return trfm.position + (trfm.position - positions[(ptr + 1)%20]) * ticks/200;
+        Vector3 avgVel = (trfm.position - positions[(ptr + 19) % 20]) * 10;
+        avgVel += (trfm.position - positions[(ptr + 18) % 20]) * 5;
+        avgVel += (trfm.position - positions[(ptr + 16) % 20]) * 1.6f;
+        avgVel = avgVel / 3;
+        return trfm.position + avgVel * ticks/50f;
     }
 }

@@ -9,6 +9,7 @@ public class GunEnemy : SmartEnemy
     new void Start()
     {
         base.Start();
+        currentState = EnemyStates.Approach;
     }
 
     // Update is called once per frame
@@ -19,7 +20,7 @@ public class GunEnemy : SmartEnemy
         if (currentState == EnemyStates.Idle) { HandleIdle(); }
         else
         {
-
+            HandleAiming();
         }
     }
 
@@ -30,6 +31,6 @@ public class GunEnemy : SmartEnemy
 
     void HandleAiming()
     {
-        //Tools.LerpRotation(gunTrfm, )
+        Tools.LerpRotation(gunTrfm, player.trfm.position, .2f);
     }
 }

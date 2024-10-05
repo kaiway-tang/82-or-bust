@@ -94,7 +94,8 @@ public class Tools : MonoBehaviour
     {
         emptyTrfm.position = trfm.position;
         emptyTrfm.right = targetPos - trfm.position;
-        LerpRotation(trfm, emptyTrfm.eulerAngles.z + offset, rate);
+
+        trfm.rotation = Quaternion.Lerp(trfm.rotation, emptyTrfm.rotation, rate);
     }
 
     public static float RotationalLerp(float start, float dest, float rate)
