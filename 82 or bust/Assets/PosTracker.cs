@@ -6,7 +6,7 @@ public class PosTracker : MonoBehaviour
 {
     int timer;
     int ptr;
-    Vector3[] positions;
+    [SerializeField] Vector3[] positions;
     Transform trfm;
     
     void Start()
@@ -37,6 +37,6 @@ public class PosTracker : MonoBehaviour
         ticks = Mathf.Min(ticks, 200);
         int backIndex = ptr - ticks / 10;
         if (backIndex < 0) { backIndex += 20; }
-        return trfm.position * 2 - positions[backIndex];
+        return trfm.position + (trfm.position - positions[(ptr + 1)%20]) * ticks/200;
     }
 }
