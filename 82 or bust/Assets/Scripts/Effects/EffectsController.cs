@@ -4,13 +4,23 @@ using UnityEngine;
 
 public class EffectsController : MonoBehaviour
 {
+    [Header("Lasers")]
     [SerializeField] Transform laser1;
     [SerializeField] Transform laser2;
+
+    [Header("Crosshair")]
+    [SerializeField] Transform crosshairParent;
+    [SerializeField] Transform crosshair;
+    [SerializeField] Transform crossUp;
+    [SerializeField] Transform crossDown;
+    [SerializeField] Transform crossLeft;
+    [SerializeField] Transform crossRight; 
     
     // Start is called before the first frame update
     void Start()
     {
-        SetLasers(Vector2.up, 2f, 0.5f);
+        // SetLasers(Vector2.up, 2f, 0.5f);
+        SpinCrosshair(1f, 0.5f);
     }
 
     // Update is called once per frame
@@ -46,5 +56,39 @@ public class EffectsController : MonoBehaviour
         yield return new WaitForSeconds(holdDuration);
         laser1.gameObject.SetActive(false);
         laser2.gameObject.SetActive(false);
+    }
+
+    public void SpinCrosshair(float duration, float holdDuration = 0f)
+    {
+        StartCoroutine(CrosshairLock(duration, holdDuration));
+    }
+
+    IEnumerator CrosshairLock(float duration, float holdDuration)
+    {
+        crosshairParent.gameObject.SetActive(true);
+        crosshair.right = transform.right; 
+        // Rotate once, the cross converges in the middle
+        float rotDelta = 360f / duration * Time.fixedDeltaTime;
+        float crosshairDist = crossUp.localPosition.y;
+        float elapsed = 0;
+        while (elapsed < duration)
+        {
+            crosshair.Rotate(Vector3.forward * rotDelta);
+            float curDist = Mathf.Lerp(crosshairDist, 0.1f, elapsed / duration);
+            crossUp.position = new Vector3(transform.position.x, transform.position.y + curDist);
+            crossDown.position = new Vector3(transform.position.x, transform.position.y - curDist);
+            crossLeft.position = new Vector3(transform.position.x - curDist, transform.position.y);
+            crossRight.position = new Vector3(transform.position.x + curDist, transform.position.y); 
+            yield return new WaitForFixedUpdate();
+            elapsed += Time.fixedDeltaTime;
+        }
+
+        yield return new WaitForSeconds(holdDuration);
+
+        crossUp.position = new Vector3(transform.position.x, transform.position.y + crosshairDist);
+        crossDown.position = new Vector3(transform.position.x, transform.position.y - crosshairDist);
+        crossLeft.position = new Vector3(transform.position.x - crosshairDist, transform.position.y);
+        crossRight.position = new Vector3(transform.position.x + crosshairDist, transform.position.y);
+        crosshairParent.gameObject.SetActive(false); 
     }
 }
