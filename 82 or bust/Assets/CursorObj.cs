@@ -12,8 +12,8 @@ public class CursorObj : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        trfm.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + Vector3.forward * 10;
     }
 }

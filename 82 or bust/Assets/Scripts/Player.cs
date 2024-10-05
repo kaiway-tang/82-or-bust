@@ -13,11 +13,13 @@ public class Player : MobileEntity
     bool hasDJump;
 
     Vector2 mousePos;
+    [SerializeField] PosTracker posTracker;
 
     private void Awake()
     {
         trfm = transform;
         self = GetComponent<Player>();
+        GameManager.playerPosTracker = posTracker;
     }
 
     new void Start()

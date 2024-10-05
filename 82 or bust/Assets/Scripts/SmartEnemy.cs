@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SmartEnemy : MonoBehaviour
+public class SmartEnemy : Enemy
 {
     public enum EnemyStates
     {
         Idle,
-        Move,
+        Approach,
         Attack
     }
 
     float timeElapsed = 0;
     EnemyStates _state;
-    EnemyStates currentState
+    protected EnemyStates currentState
     {
         get
         {
@@ -49,17 +49,11 @@ public class SmartEnemy : MonoBehaviour
         {
             case EnemyStates.Idle:
                 break;
-            case EnemyStates.Move:
+            case EnemyStates.Approach:
                 break;
             case EnemyStates.Attack:
                 break;
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
     }
 
     // Update is called once per frame

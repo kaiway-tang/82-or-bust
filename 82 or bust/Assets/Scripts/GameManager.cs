@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager self;
     public static Player player;
     public static Transform playerTrfm;
+    public static PosTracker playerPosTracker;
 
     private void Start()
     {
