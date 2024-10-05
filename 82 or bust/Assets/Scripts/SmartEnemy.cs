@@ -45,7 +45,15 @@ public class SmartEnemy : MonoBehaviour
 
     protected void OnStateUpdate(EnemyStates state, float curTime)
     {
-        
+        switch (state)
+        {
+            case EnemyStates.Idle:
+                break;
+            case EnemyStates.Move:
+                break;
+            case EnemyStates.Attack:
+                break;
+        }
     }
 
     // Start is called before the first frame update
