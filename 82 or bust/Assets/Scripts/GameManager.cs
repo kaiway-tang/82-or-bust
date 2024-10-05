@@ -23,14 +23,36 @@ public class GameManager : MonoBehaviour
         self = GetComponent<GameManager>();
     }
 
+    private void FixedUpdate()
+    {
+        if (inSloMo)
+        {
+            Time.timeScale += 0.025f;
+            if (Time.timeScale >= 1)
+            {
+                Time.timeScale = 1;
+                inSloMo = false;
+            }
+        }
+    }
+
     public static int GetEntityID()
     {
         assignID++;
         return assignID;
     }
 
+    static bool inSloMo;
+    public static void SetSloMo(float percentage)
+    {
+        inSloMo = true;
+        Time.timeScale = percentage;
+    }
+
     public void Restart()
     {
         assignID = 0;
+        inSloMo = false;
+        Time.timeScale = 1;
     }
 }

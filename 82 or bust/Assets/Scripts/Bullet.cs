@@ -5,15 +5,16 @@ using UnityEngine;
 public class Bullet : Hitbox
 {
     [SerializeField] float speed;
-    Transform trfm;
     // Start is called before the first frame update
-    void Start()
+    protected new void Start()
     {
+        base.Start();
         trfm = transform;
     }
 
-    void FixedUpdate()
+    protected new void FixedUpdate()
     {
+        base.FixedUpdate();
         trfm.position += trfm.right * speed;
     }
 

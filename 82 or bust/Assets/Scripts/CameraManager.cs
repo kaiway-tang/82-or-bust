@@ -163,7 +163,7 @@ public class CameraManager : MonoBehaviour
 
         if (dmgVigFading)
         {
-            Tools.AddAlpha(dmgVignette, -0.01f);
+            Tools.AddAlpha(dmgVignette, -0.02f);
             if (dmgVignette.color.a <= 0)
             {
                 dmgVigFading = false;

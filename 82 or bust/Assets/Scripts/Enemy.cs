@@ -7,7 +7,7 @@ public class Enemy : MobileEntity
     // player transform: GameManager.playerTrfm  OR  player.trfm
 
 
-
+    [SerializeField] GameObject damageFX;
     [SerializeField] float targetRange;
 
     public static Player player;
@@ -25,6 +25,20 @@ public class Enemy : MobileEntity
         base.FixedUpdate();
 
         HandlePlayerTrackingUpdates();
+    }
+
+    public override int TakeDamage(int amount, int sourceID)
+    {
+        int result = base.TakeDamage(amount, sourceID);
+        if (result != HPEntity.IGNORED)
+        {
+            Instantiate(damageFX, trfm.position, Quaternion.identity);
+            if (result == HPEntity.DEAD)
+            {
+                Destroy(baseObj);
+            }
+        }        
+        return result;
     }
 
     #region PLAYER_TRACKING

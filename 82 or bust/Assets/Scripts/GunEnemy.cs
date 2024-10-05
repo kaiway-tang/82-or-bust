@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GunEnemy : SmartEnemy
 {
-    [SerializeField] Transform gunTrfm;
+    [SerializeField] Transform gunTrfm, firepoint;
     [SerializeField] GameObject bullet;
     // Start is called before the first frame update
     new void Start()
@@ -41,7 +41,7 @@ public class GunEnemy : SmartEnemy
 
         if (cooldown < 50 && cooldown % 10 == 0)
         {
-            Instantiate(bullet, gunTrfm.position, gunTrfm.rotation);
+            Instantiate(bullet, firepoint.position, gunTrfm.rotation);
             if (cooldown < 1) { cooldown = Random.Range(100, 125); }
         }
     }

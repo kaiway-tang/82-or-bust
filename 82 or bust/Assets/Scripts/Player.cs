@@ -13,9 +13,15 @@ public class Player : MobileEntity
     bool hasDJump;
 
     int mana;
-    [SerializeField] int dashPower, dashMovementDuration, dashIFrameDuration;
-    [SerializeField] float dashExitVelocity;
+    [SerializeField] int dashPower, dashMovementDuration, dashIFrameDuration, dashExitVelocity;
+    [SerializeField] int dslashPower, dslashMovementDuration, dslashIFrameDuration, dslashExitVelocity;
+    [SerializeField] Hitbox dslashHitbox;
+    [SerializeField] GameObject perfectDodgeObj;
+
+    [SerializeField] Scaler manaScaler;
     [SerializeField] Collider2D hurtbox;
+
+    [SerializeField] GameObject dJumpFX;
 
     Vector3 mousePos;
     [SerializeField] PosTracker posTracker;
@@ -33,12 +39,13 @@ public class Player : MobileEntity
     {
         base.Start();
 
-        mana = 999999;
+        AddMana(1000);
     }
 
     private void Update()
     {
         HandleJump();
+        DashSlashCast();
         DashRollCast();
     }
 
@@ -52,7 +59,9 @@ public class Player : MobileEntity
         HandleFriction();
         HandleHorizontalMovement();
 
+        HandleDSlash();
         HandleDashRoll();
+        HandleMana();
     }
 
     #region MOVEMENT
@@ -103,6 +112,7 @@ public class Player : MobileEntity
             }
             else if (hasDJump)
             {
+                Instantiate(dJumpFX, trfm.position + Vector3.up * -.6f, Quaternion.identity);
                 SetYVelocity(doubleJumpPower);
                 hasDJump = false;
             }
@@ -139,32 +149,91 @@ public class Player : MobileEntity
 
     #region ABILITIES
 
+    public void PerfectDodged()
+    {
+        GameManager.SetSloMo(0.5f);
+        AddMana(500);
+    }
+
+    void HandleMana()
+    {
+        if (mana < 1000)
+        {
+            AddMana(5);
+        }
+    }
+
+    void AddMana(int amount)
+    {
+        mana += amount;
+        if (mana > 1000) { mana = 1000; }
+        manaScaler.SetTargetScale(mana * 0.001f, 0.3f);
+    } 
+
+    int dslashMovementTmr, dslashIFrameTmr;
+    void DashSlashCast()
+    {
+        if (In.DSlashPressed() && mana >= 500)
+        {
+            if (dashIFrameTmr > 0) { dashIFrameTmr = 1; }
+            if (dashMovementTmr > 0) { dashMovementTmr = 1; }
+            if (dashIFrameTmr > 0 || dashMovementTmr > 0) { HandleDashRoll(); }
+
+            if (dslashIFrameTmr < 1) { ToggleInvuln(true); }
+            if (dslashMovementTmr < 1) { movementLock++; }
+
+            rb.gravityScale = 0;
+            dslashMovementTmr = dslashMovementDuration;
+            dslashIFrameTmr = dslashIFrameDuration; 
+
+            rb.velocity = (mousePos - trfm.position).normalized * dslashPower;
+
+            dslashHitbox.Activate(dslashMovementTmr);
+            dslashHitbox.trfm.right = rb.velocity;
+
+            mana -= 500;
+            manaScaler.SetTargetScale(mana * 0.001f, 0.3f);
+        }
+    }
+
+    void HandleDSlash()
+    {
+        if (dslashMovementTmr > 0)
+        {
+            dslashMovementTmr--;
+            if (dslashMovementTmr < 1)
+            {
+                rb.velocity = rb.velocity * dslashExitVelocity / dslashPower;
+                rb.gravityScale = 6;
+                movementLock--;
+            }
+        }
+        
+        if (dslashIFrameTmr > 0)
+        {
+            dslashIFrameTmr--;
+            if (dslashIFrameTmr < 1) { ToggleInvuln(false); }
+        }
+    }
+
     int dashMovementTmr, dashIFrameTmr;
     void DashRollCast()
     {
-        if (In.DashRollPressed() && mana >= 25)
+        if (In.DashRollPressed() && mana >= 250 && dashMovementTmr < 1)
         {
+            if (dashIFrameTmr < 1) { ToggleInvuln(true); }
+            if (dashMovementTmr < 1) { movementLock++; }
+
             rb.gravityScale = 0;
             dashMovementTmr = dashMovementDuration;
             dashIFrameTmr = dashIFrameDuration;
-            hurtbox.enabled = false;
+            
+            rb.velocity = (mousePos - trfm.position).normalized * dashPower;
 
-            Vector3 dashVect = (mousePos - trfm.position).normalized * dashPower;
-            Debug.Log("dashvect" + (mousePos - trfm.position).normalized);
-            Vector3 rbVect = rb.velocity;
-            if ((dashVect + rbVect).sqrMagnitude > dashVect.sqrMagnitude)
-            {
-                rb.velocity = dashVect + rbVect;
-            }
-            else
-            {
-                rb.velocity = dashVect;
-            }
-            rb.velocity = dashVect;
+            Instantiate(perfectDodgeObj, trfm.position, Quaternion.identity);
 
-            if (dashMovementTmr < 1) { movementLock++; }            
-
-            mana -= 25;
+            mana -= 250;
+            manaScaler.SetTargetScale(mana * 0.001f, 0.3f);
         }
     }
     void HandleDashRoll()
@@ -186,10 +255,37 @@ public class Player : MobileEntity
             dashIFrameTmr--;
             if (dashIFrameTmr == 0)
             {
-                hurtbox.enabled = true;
+                ToggleInvuln(false);
             }
         }
     }
 
+    int invuln;
+    void ToggleInvuln(bool active)
+    {
+        if (active) { invuln++; hurtbox.enabled = false; }
+        else
+        {
+            invuln--;
+            if (invuln < 1) { hurtbox.enabled = true; }
+        }
+    }
+
     #endregion
+
+    public override int TakeDamage(int amount, int sourceID)
+    {
+        if (sourceID != 0 && sourceID == entityID) { return IGNORED; }
+
+        CameraManager.SetDmgVig(Mathf.Min(1.0f, amount/30f));
+        CameraManager.SetTrauma(Mathf.Min(30, amount));
+
+        int result = base.TakeDamage(amount, sourceID);
+        if (result == DEAD)
+        {
+            baseObj.SetActive(false);
+        }
+
+        return result;
+    }
 }

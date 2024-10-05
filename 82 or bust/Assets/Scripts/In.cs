@@ -10,6 +10,7 @@ public class In : MonoBehaviour
         DSlashKey, DSlashKey1,
         DashRollKey, DashRollKey1;
 
+    public static int slashMB, dslashMB, rollMB;
 
     static bool firstLoad;
 
@@ -34,6 +35,10 @@ public class In : MonoBehaviour
 
         DashRollKey = KeyCode.LeftShift;
         DashRollKey1 = KeyCode.RightShift;
+
+        slashMB = 1;
+        dslashMB = 0;
+        rollMB = 1;
 
         firstLoad = true;
     }
@@ -121,37 +126,37 @@ public class In : MonoBehaviour
 
     public static bool SlashPressed()
     {
-        return Input.GetMouseButtonDown(0);
+        return Input.GetMouseButtonDown(slashMB);
     }
     public static bool SlashHeld()
     {
-        return Input.GetMouseButton(0);
+        return Input.GetMouseButton(slashMB);
     }
     public static bool SlashReleased()
     {
-        return Input.GetMouseButtonUp(0);
+        return Input.GetMouseButtonUp(slashMB);
     }
 
     public static bool DSlashPressed()
     {
-        return Input.GetMouseButtonDown(1);
+        return Input.GetMouseButtonDown(dslashMB);
     }
     public static bool DSlashHeld()
     {
-        return Input.GetMouseButton(1);
+        return Input.GetMouseButton(dslashMB);
     }
     public static bool DSlashReleased()
     {
-        return Input.GetMouseButtonUp(1);
+        return Input.GetMouseButtonUp(dslashMB);
     }
 
     public static bool DashRollPressed()
     {
-        return Input.GetKeyDown(DashRollKey) || Input.GetKeyDown(DashRollKey1);
+        return Input.GetKeyDown(DashRollKey) || Input.GetKeyDown(DashRollKey1) || Input.GetMouseButtonDown(rollMB);
     }
     public static bool DashRollHeld()
     {
-        return Input.GetKey(DashRollKey) || Input.GetKey(DashRollKey1);
+        return Input.GetKey(DashRollKey) || Input.GetKey(DashRollKey1) || Input.GetMouseButton(rollMB);
     }
 
     static Vector2 vect2;

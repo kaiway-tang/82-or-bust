@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class HPEntity : MonoBehaviour
 {
-    [SerializeField] int HP, maxHP, entityID;
+    [SerializeField] protected int HP, maxHP, entityID;
+    public GameObject baseObj;
     // Start is called before the first frame update
     protected void Start()
     {
@@ -12,6 +13,8 @@ public class HPEntity : MonoBehaviour
         {
             maxHP = HP;
         }
+
+        if (!baseObj) { baseObj = gameObject; }
     }
 
     protected void FixedUpdate()
@@ -23,7 +26,7 @@ public class HPEntity : MonoBehaviour
     public static event OnDamage damageEvent;
 
     public const int ALIVE = 0, DEAD = 1, IGNORED = 2;
-    public int TakeDamage(int amount, int sourceID)
+    public virtual int TakeDamage(int amount, int sourceID)
     {
         if (sourceID != 0 && sourceID == entityID) { return IGNORED; }
 
@@ -31,9 +34,9 @@ public class HPEntity : MonoBehaviour
 
         damageEvent?.Invoke();
         
-        if (HP < 0)
+        if (HP <= 0)
         {
-            return HP;
+            return DEAD;
         }
         return ALIVE;
     }
