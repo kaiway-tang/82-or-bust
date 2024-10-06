@@ -92,6 +92,7 @@ public class Tools : MonoBehaviour
 
     public static void FacePosition(Transform trfm, Vector3 targetPos, float rate, float offset = 0)
     {
+        targetPos.z = 0;
         emptyTrfm.position = trfm.position;
         emptyTrfm.localEulerAngles = Vector3.zero;
         emptyTrfm.right = targetPos - trfm.position;

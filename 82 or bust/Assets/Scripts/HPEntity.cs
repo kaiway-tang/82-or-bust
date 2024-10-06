@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HPEntity : MonoBehaviour
 {
-    [SerializeField] protected int HP, maxHP, entityID;
+    public int HP, maxHP, entityID;
     public GameObject baseObj;
     // Start is called before the first frame update
     protected void Start()

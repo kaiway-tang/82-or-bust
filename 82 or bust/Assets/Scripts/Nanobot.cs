@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
-public class Nanobot : SmartEnemy
+public class Nanobot : MobileEntity
 {
-    [SerializeField] Transform followTarget;
-    NavMeshAgent agent;
-    [SerializeField] float approachDistance = 10f;  // Distance to start attacking
-    [SerializeField] float attackDistance = 3f;     // Distance to trigger attack
+    [SerializeField] NavMeshAgent agent;
     public LayerMask raycastLayer;
 
-    private Transform target;
+    [SerializeField] float accl, maxSpeed, turnSpd, friction;
+    [SerializeField] OnGround rightAntenna, leftAntenna;
+    [SerializeField] Transform target;
 
+    [SerializeField] int state = 0;
+    const int SCATTERING = 0, SEEKING = 1, TRANSITION = 2;
+
+    Transform trfm;
+    Vector3 agentPos;
     /*
      * If idle, transition into move state
      * At start of move state, find suitable target. 
@@ -27,84 +30,119 @@ public class Nanobot : SmartEnemy
     new void Start()
     {
         base.Start();
-        agent = GetComponent<NavMeshAgent>();
-        currentState = EnemyStates.Idle;
+        trfm = transform;
+        agent.transform.parent = null;
     }
 
-    
-
-
-    //// Update is called once per frame
-    //void Update()
-    //{
-    //    if (followTarget)
-    //    {
-    //        agent.SetDestination(followTarget.position);
-    //    }
-    //}
-
-    protected override void OnStateBegin(EnemyStates state)
+    private void Update()
     {
-        switch (state)
+        if (Input.GetKey(KeyCode.F))
         {
-            case EnemyStates.Idle:
-                break;
-            case EnemyStates.Approach:
-                // Find a suitable target at the start of Approach state
-                target = FindTarget();
-                break;
-            case EnemyStates.Attack:
-                // In Attack state, we try to navigate away from the player
-                RaycastAwayFromPlayer();
-                break;
+            Scatter(CursorObj.trfm.position, 150);
         }
     }
 
-    protected override void OnStateEnd(EnemyStates state)
+    private new void FixedUpdate()
     {
-        // Cleanup code for state transitions can be added here, if needed.
+        base.FixedUpdate();
+        Animate();
+
+        if (state == SCATTERING)
+        {
+            HandleScattering();
+        }
+        else if (state == SEEKING)
+        {
+            HandleSeeking();
+        }
+        else if (state == TRANSITION)
+        {
+            HandleTransition();
+        }
     }
 
-    protected override void OnStateUpdate(EnemyStates state, float curTime)
+    int transitionTmr;
+    void HandleTransition()
     {
-        switch (state)
+        transitionTmr--;
+        if (transitionTmr < 1)
         {
-            case EnemyStates.Idle:
-                // In Idle, we immediately move to approach state as described
-                currentState = EnemyStates.Approach;
-                break;
-
-            case EnemyStates.Approach:
-                if (target == null)
-                {
-                    // No target found, go back to idle state
-                    currentState = EnemyStates.Idle;
-                }
-                else
-                {
-                    // Move towards target
-                    agent.SetDestination(target.position);
-
-                    // If within attack range, transition to attack state
-                    //float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
-                    //if (distanceToPlayer <= attackDistance)
-                    //{
-                    //    currentState = EnemyStates.Attack;
-                    //}
-                }
-                break;
-
-            case EnemyStates.Attack:
-                float currentDistanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
-
-                if (currentDistanceToPlayer > approachDistance)
-                {
-                    // Player is too far, transition to idle
-                    currentState = EnemyStates.Idle;
-                }
-                // Raycast and navigate was handled in OnStateBegin, no additional movement logic here.
-                break;
+            Seek();
         }
+
+        ApplyDirectionalFriction(friction);
+    }
+
+    public void Seek()
+    {
+        agent.transform.position = trfm.position;
+        agent.enabled = true;
+        state = SEEKING;
+    }
+
+    void HandleSeeking()
+    {
+        agentPos = agent.transform.position;
+        if (!Tools.InDistance(agentPos, trfm.position, .1f))
+        {
+            agent.transform.position = (trfm.position + agentPos) * .5f;
+            agentPos = agent.transform.position;
+        }
+        agentPos.z = 0;
+
+        if (rb.velocity.sqrMagnitude < maxSpeed * maxSpeed)
+        {
+            vect2 = (agentPos - trfm.position).normalized;
+            rb.velocity += vect2 * accl;
+        }
+        ApplyDirectionalFriction(friction);
+
+        Tools.FacePosition(trfm, agentPos, 0.1f, -90);
+
+        agent.SetDestination(target.position);
+    }
+
+    public void Scatter(Vector3 point, int duration = 50)
+    {
+        scatterPoint = point;
+        scatterPoint.z = trfm.position.z;
+        scatterTmr = duration;
+        state = SCATTERING;
+        agent.enabled = false;
+        trfm.up = trfm.position - scatterPoint;
+        rb.velocity = trfm.up * maxSpeed * .6f;
+
+        trfm.Rotate(Vector3.forward * Random.Range(-22, 23));
+    }
+
+    Vector3 scatterPoint;
+    int scatterTmr;
+    void HandleScattering()
+    {
+        if (scatterTmr > 0) { scatterTmr--; }
+        if (scatterTmr < 1)
+        {
+            state = TRANSITION;
+            transitionTmr = 35;
+            return;
+        }
+
+        if (rightAntenna.touchCount > 0) { trfm.Rotate(Vector3.forward * turnSpd); }
+        else if (leftAntenna.touchCount > 0) { trfm.Rotate(Vector3.forward * -turnSpd); }
+
+        vect2 = trfm.up;
+        if (rightAntenna.touchCount < 1 || rightAntenna.touchCount < 1)
+        {
+            if (rb.velocity.sqrMagnitude < maxSpeed * maxSpeed) { rb.velocity += vect2 * accl; }
+        }
+        else { rb.velocity -= vect2 * accl; }
+
+        ApplyDirectionalFriction(friction);
+    }
+
+    void Animate()
+    {
+
     }
 
     private Transform FindTarget()
@@ -148,7 +186,7 @@ public class Nanobot : SmartEnemy
     private void RaycastAwayFromPlayer()
     {
         // Raycast directly away from the player to escape
-        Vector2 directionAwayFromPlayer = (transform.position - player.transform.position).normalized;
+        Vector2 directionAwayFromPlayer = (transform.position - Player.self.trfm.position).normalized;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, directionAwayFromPlayer, Mathf.Infinity);
 
         if (hit.collider != null)

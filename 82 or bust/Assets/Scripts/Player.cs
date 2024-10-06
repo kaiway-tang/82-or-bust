@@ -187,9 +187,12 @@ public class Player : MobileEntity
 
             rb.gravityScale = 0;
             dslashMovementTmr = dslashMovementDuration;
-            dslashIFrameTmr = dslashIFrameDuration; 
+            dslashIFrameTmr = dslashIFrameDuration;
 
-            rb.velocity = (mousePos - trfm.position).normalized * dslashPower;
+            vect2 = mousePos - trfm.position;
+            if (vect2.y > 0) { vect2.y *= dslashVertFactor; }
+            float factor = vect2.magnitude / (Mathf.Pow((mousePos - trfm.position).magnitude, 2));
+            rb.velocity = (mousePos - trfm.position) * factor * dslashPower;
 
             dslashHitbox.Activate(dslashMovementTmr);
             dslashHitbox.trfm.right = rb.velocity;
@@ -231,7 +234,7 @@ public class Player : MobileEntity
             dashIFrameTmr = dashIFrameDuration;
 
             vect2 = mousePos - trfm.position;
-            vect2.y *= dslashVertFactor;
+            if (vect2.y > 0) { vect2.y *= dslashVertFactor; }
             float factor = vect2.magnitude / (Mathf.Pow((mousePos - trfm.position).magnitude, 2));
             rb.velocity = (mousePos - trfm.position) * factor * dashPower;
 
