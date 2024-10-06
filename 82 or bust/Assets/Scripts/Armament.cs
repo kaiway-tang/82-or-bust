@@ -51,7 +51,7 @@ public class Armament : MonoBehaviour
 
     protected void Aim()
     {
-        Tools.LerpRotation(trfm, Player.self.trfm.position, aimRate);
+        Tools.FacePosition(trfm, Player.self.trfm.position, aimRate);
     }
 
     protected int fireTmr;

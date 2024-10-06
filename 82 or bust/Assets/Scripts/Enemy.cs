@@ -6,10 +6,10 @@ public class Enemy : MobileEntity
 {
     // player transform: GameManager.playerTrfm  OR  player.trfm
 
-
     [SerializeField] GameObject damageFX;
     [SerializeField] float targetRange;
     [SerializeField] Armament armament;
+    [SerializeField] int damageTrauma, deathTrauma;
 
     public static Player player;
 
@@ -19,6 +19,8 @@ public class Enemy : MobileEntity
     protected new void Start()
     {
         base.Start();
+        if (damageTrauma == 0) { damageTrauma = 12;}
+        if (deathTrauma == 0) { deathTrauma = 18; }
     }
 
     protected new void FixedUpdate()
@@ -36,7 +38,12 @@ public class Enemy : MobileEntity
             Instantiate(damageFX, trfm.position, Quaternion.identity);
             if (result == HPEntity.DEAD)
             {
+                CameraManager.SetTrauma(deathTrauma);
                 Destroy(baseObj);
+            }
+            else
+            {
+                CameraManager.SetTrauma(damageTrauma);
             }
         }        
         return result;

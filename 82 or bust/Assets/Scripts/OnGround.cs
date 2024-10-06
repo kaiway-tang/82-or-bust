@@ -7,7 +7,7 @@ public class OnGround : MonoBehaviour
     public int touchCount;
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.layer == 8)
+        if (col.gameObject.layer == Layers.TERRAIN || col.gameObject.layer == Layers.HURTBOX)
         {
             touchCount++;
         }
@@ -15,7 +15,7 @@ public class OnGround : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D col)
     {
-        if (col.gameObject.layer == 8)
+        if (col.gameObject.layer == Layers.TERRAIN || col.gameObject.layer == Layers.HURTBOX)
         {
             touchCount--;
         }

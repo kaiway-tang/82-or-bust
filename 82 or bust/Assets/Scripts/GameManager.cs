@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,6 +22,12 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         self = GetComponent<GameManager>();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.RightShift) && Input.GetKeyDown(KeyCode.Return))
+        { SceneManager.LoadScene("ProcGen"); }
     }
 
     private void FixedUpdate()

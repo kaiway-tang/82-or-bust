@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Rocket : MonoBehaviour
 {
-    [SerializeField] float accl, maxSpeed, turnSpeed;
+    [SerializeField] float accl, maxSpeed, minSpeed, turnSpeed;
     [SerializeField] GameObject explosion;
     [SerializeField] float speed;
     Transform trfm;
@@ -12,6 +12,7 @@ public class Rocket : MonoBehaviour
     void Start()
     {
         trfm = transform;
+        speed = minSpeed;
     }
 
     // Update is called once per frame
@@ -24,7 +25,7 @@ public class Rocket : MonoBehaviour
         }
 
         trfm.position += trfm.up * speed;
-        Tools.LerpRotation(trfm, Player.self.trfm.position, turnSpeed * speed, -90);
+        Tools.FacePosition(trfm, Player.self.trfm.position, turnSpeed * speed, -90);
     }
 
     private void OnTriggerEnter2D(Collider2D col)

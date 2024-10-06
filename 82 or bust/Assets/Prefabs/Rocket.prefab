@@ -99,8 +99,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bf06be26b327ac44b011fff4b858aec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  accl: 0.0015
+  accl: 0.001
   maxSpeed: 0.15
+  minSpeed: 0.07
   turnSpeed: 0.3
   explosion: {fileID: 2457982617717632336, guid: 308858cbf354b8547a8eea626cf9065f, type: 3}
   speed: 0

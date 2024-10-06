@@ -24,10 +24,10 @@ public class Level : MonoBehaviour
             newChunk.AddComponent<TilemapCollider2D>();
 
             Chunk chunk = newChunk.GetComponent<Chunk>();
-            for (int j = 0; j < chunk.spawnNodes.Length; j++)
+            for (int j = 0; j < chunk.spawnNodes.Count; j++)
             {
-                if (Random.Range(0, chunk.spawnNodes.Length) < 3)
-                { Instantiate(enemies[Random.Range(0, enemies.Length)], chunk.spawnNodes[j].position, Quaternion.identity); }
+                if (Random.Range(0, chunk.spawnNodes.Count) < 3)
+                { Instantiate(enemies[Random.Range(0, enemies.Length)], chunk.spawnNodes[j].transform.position, Quaternion.identity); }
                 Destroy(chunk.spawnNodes[j].gameObject);
             }
         }

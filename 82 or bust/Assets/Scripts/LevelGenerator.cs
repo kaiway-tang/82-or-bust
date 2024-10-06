@@ -10,6 +10,7 @@ using UnityEngine.Tilemaps;
 public class LevelGenerator : MonoBehaviour
 {
     [SerializeField] GameObject[] enemies;
+    [SerializeField] GameObject[] bridge;
     [SerializeField] Tilemap curTilemap;
     [SerializeField] GameObject navMeshPrefab;
     [SerializeField] int chunkWidth = 15;
@@ -26,7 +27,7 @@ public class LevelGenerator : MonoBehaviour
         navmesh = GetComponent<NavMeshSurface>();
         chunks = new List<GameObject>();
         LoadChunks();
-        GenerateLevel(2);
+        GenerateLevel(3);
     }
 
     void LoadChunks()
@@ -39,6 +40,7 @@ public class LevelGenerator : MonoBehaviour
         {
             chunks.Add(chunk);
             Debug.Log("Loaded chunk: " + chunk.name);
+
         }
 
         if (chunks.Count == 0)
@@ -55,11 +57,26 @@ public class LevelGenerator : MonoBehaviour
         //newChunk.AddComponent<TilemapCollider2D>();
 
         Chunk chunk = chunkObj.GetComponent<Chunk>();
-        for (int j = 0; j < chunk.spawnNodes.Length; j++)
+        chunk.Init();
+        for (int j = 0; j < chunk.spawnNodes.Count; j++)
         {
-            if (Random.Range(0, chunk.spawnNodes.Length) < 3)
-            { Instantiate(enemies[Random.Range(0, enemies.Length)], anchor + chunk.spawnNodes[j].localPosition, Quaternion.identity); }
+            if (Random.Range(0, chunk.spawnNodes.Count) < 3)
+            { Instantiate(enemies[Random.Range(0, enemies.Length)], anchor + chunk.spawnNodes[j].transform.localPosition, Quaternion.identity); }
             // Destroy(chunk.spawnNodes[j].gameObject);
+        }
+
+        for (int i = 0; i < chunk.bridges.Count; i++)
+        {
+            if (Random.Range(0, 2) < 99)
+            {
+                if (chunk.bridges[i].width == 0)
+                {
+                    Debug.Log("bruh: " + chunk.bridges[i]);
+                    Instantiate(bridge[3], anchor + chunk.bridges[i].trfm.localPosition, Quaternion.identity);
+                    continue;
+                }                
+                Instantiate(bridge[chunk.bridges[i].width - 2], anchor + chunk.bridges[i].trfm.localPosition, Quaternion.identity);
+            }
         }
     }
 
@@ -93,8 +110,9 @@ public class LevelGenerator : MonoBehaviour
     void GenerateCell(int anchorx, int anchory)
     {
         // Use below function when system linked
-        // Tilemap refMap = LevelManager.self.chunks[Random.Range(0, LevelManager.self.chunks.Length)].GetComponent<Tilemap>();
-        Tilemap refMap = chunks[Random.Range(0, LevelManager.self.chunks.Length)].GetComponent<Tilemap>();
+        // Tilemap refMap = LeelManager.self.chunks[Random.Range(0, LevelManager.self.chunks.Length)].GetComponent<Tilemap>();
+        Chunk chunk = chunks[Random.Range(0, chunks.Count)].GetComponent<Chunk>();
+        Tilemap refMap = chunk.tilemap;
         refMap.CompressBounds();
         for (int x = 0; x < chunkWidth; x++)
         {
@@ -114,6 +132,8 @@ public class LevelGenerator : MonoBehaviour
 
         // Load spawnpoints
         LoadSpawnpoints(refMap.gameObject, new Vector3(anchorx, anchory));
+
+        // SpawnEnemies(chunk, 3);
     }
 
     // Update is called once per frame

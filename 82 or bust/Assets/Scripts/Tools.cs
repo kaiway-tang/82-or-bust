@@ -90,13 +90,16 @@ public class Tools : MonoBehaviour
         trfm.eulerAngles = vect3;
     }
 
-    public static void LerpRotation(Transform trfm, Vector3 targetPos, float rate, float offset = 0)
+    public static void FacePosition(Transform trfm, Vector3 targetPos, float rate, float offset = 0)
     {
         emptyTrfm.position = trfm.position;
+        emptyTrfm.localEulerAngles = Vector3.zero;
         emptyTrfm.right = targetPos - trfm.position;
         if (offset != 0) { emptyTrfm.Rotate(Vector3.forward * offset); }
 
-        trfm.rotation = Quaternion.Lerp(trfm.rotation, emptyTrfm.rotation, rate);
+        vect3 = trfm.localEulerAngles;
+        vect3.z = RotationalLerp(vect3.z, emptyTrfm.localEulerAngles.z, rate);
+        trfm.localEulerAngles = vect3;
     }
 
     public static float RotationalLerp(float start, float dest, float rate)

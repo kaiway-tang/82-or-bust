@@ -5,6 +5,7 @@ using UnityEngine;
 public class Locomotor : MobileEntity
 {
     [SerializeField] float accl, maxSpeed, friction;
+    [SerializeField] int minDist;
     public bool playerVisible;
     [SerializeField] OnGround ledgeDetect;
     [SerializeField] WarpObj warpObj;
@@ -19,6 +20,7 @@ public class Locomotor : MobileEntity
     new void Start()
     {
         base.Start();
+        warpCD = 100;
     }
 
     new void FixedUpdate()
@@ -52,11 +54,19 @@ public class Locomotor : MobileEntity
 
     void HandleFacing()
     {
-        if (playerVisible)
+        if (state == ENGAGED)
         {
-            if (Player.self.trfm.position.x > trfm.position.x) { FaceRight(); }
-            else { FaceLeft(); }
-        }
+            if (Tools.BoxDist(Player.self.trfm.position, trfm.position) < minDist)
+            {
+                if (Player.self.trfm.position.x > trfm.position.x) { FaceLeft(); }
+                else { FaceRight(); }
+            }
+            else
+            {
+                if (Player.self.trfm.position.x > trfm.position.x) { FaceRight(); }
+                else { FaceLeft(); }
+            }            
+        }        
     }
 
     void HandleApproach()
@@ -65,11 +75,12 @@ public class Locomotor : MobileEntity
         {
             if (ledged)
             {
-                ApplyXFriction(friction * 3);
+                ApplyXFriction(friction);
+                AddForwardXVelocity(-accl, -maxSpeed);
             }
             if (playerVisible)
             {
-                if (!ledged) { AddForwardXVelocity(accl, maxSpeed); }                
+                if (!ledged) { AddForwardXVelocity(accl, maxSpeed); }
             }
             else
             {
@@ -127,6 +138,10 @@ public class Locomotor : MobileEntity
 
     public void EndWarp()
     {
+        vect3 = warpObj.trfm.position;
+        vect3.z = 0;
+        trfm.position = vect3;
+
         state = ROAMING;
         warpCD = 100;
     }

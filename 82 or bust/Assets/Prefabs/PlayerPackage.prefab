@@ -784,7 +784,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8467f3fb839355e4193d3ce5fcfa4274, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 100
+  HP: 9999
   maxHP: 0
   entityID: 1
   baseObj: {fileID: 8982719003872554823}
@@ -799,8 +799,8 @@ MonoBehaviour:
   groundedAcceleration: 3
   aerialAcceleration: 1.5
   maxSpeed: 9
-  jumpPower: 18
-  doubleJumpPower: 18
+  jumpPower: 20
+  doubleJumpPower: 16
   dashPower: 40
   dashMovementDuration: 9
   dashIFrameDuration: 20
@@ -809,6 +809,7 @@ MonoBehaviour:
   dslashMovementDuration: 6
   dslashIFrameDuration: 16
   dslashExitVelocity: 14
+  dslashVertFactor: 0.75
   dslashHitbox: {fileID: 1621749703843480025}
   perfectDodgeObj: {fileID: 7897934967343794803, guid: e01fb87e90d791a41a68febf96d11d64, type: 3}
   manaScaler: {fileID: 1366978446964741502}

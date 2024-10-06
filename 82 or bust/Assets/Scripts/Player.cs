@@ -15,6 +15,7 @@ public class Player : MobileEntity
     int mana; float maxMana;
     [SerializeField] int dashPower, dashMovementDuration, dashIFrameDuration, dashExitVelocity;
     [SerializeField] int dslashPower, dslashMovementDuration, dslashIFrameDuration, dslashExitVelocity;
+    [SerializeField] float dslashVertFactor;
     [SerializeField] Hitbox dslashHitbox;
     [SerializeField] GameObject perfectDodgeObj;
 
@@ -228,8 +229,11 @@ public class Player : MobileEntity
             rb.gravityScale = 0;
             dashMovementTmr = dashMovementDuration;
             dashIFrameTmr = dashIFrameDuration;
-            
-            rb.velocity = (mousePos - trfm.position).normalized * dashPower;
+
+            vect2 = mousePos - trfm.position;
+            vect2.y *= dslashVertFactor;
+            float factor = vect2.magnitude / (Mathf.Pow((mousePos - trfm.position).magnitude, 2));
+            rb.velocity = (mousePos - trfm.position) * factor * dashPower;
 
             Instantiate(perfectDodgeObj, trfm.position, Quaternion.identity);
 

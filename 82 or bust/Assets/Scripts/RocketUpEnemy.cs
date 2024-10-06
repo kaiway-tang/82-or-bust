@@ -43,7 +43,7 @@ public class RocketUpEnemy : SmartEnemy
 
         if (cooldown >= 75)
         {
-            Tools.LerpRotation(gunTrfm, player.trfm.position, .2f);
+            Tools.FacePosition(gunTrfm, player.trfm.position, .2f);
         }
         if (cooldown < 50)
         {

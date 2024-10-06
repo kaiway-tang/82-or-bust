@@ -27,7 +27,7 @@ public class AutoCannon : Armament
                 positionLocked = false;
             }
         }
-        else if (playerVisible && !telegraphed)
+        if (playerVisible)
         {
             Aim();
         }

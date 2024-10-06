@@ -37,9 +37,7 @@ public class WarpObj : MonoBehaviour
     }
 
     void EndWarp()
-    {
-        locomotor.trfm.position = trfm.position;
-        trfm.parent = locomotor.trfm;
+    { 
         locomotor.EndWarp();
         gameObject.SetActive(false);
     }

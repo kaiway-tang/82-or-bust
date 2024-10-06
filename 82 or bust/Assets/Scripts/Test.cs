@@ -5,10 +5,14 @@ using UnityEngine.AI;
 
 public class Test : MonoBehaviour
 {
-    [SerializeField] Transform target;
-    [SerializeField] NavMeshAgent agent;
+    [SerializeField] float start, dest, lerp;
+    [SerializeField] float threeZ;
+    [SerializeField] Transform one, two, three;
     private void FixedUpdate()
     {
-        agent.SetDestination(target.position);
+        start = Tools.RotationalLerp(start, dest, lerp);
+
+        Tools.FacePosition(one, two.position, lerp);
+
     }
 }
