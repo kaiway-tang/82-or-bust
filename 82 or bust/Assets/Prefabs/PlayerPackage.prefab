@@ -807,7 +807,7 @@ MonoBehaviour:
   dashExitVelocity: 8
   dslashPower: 60
   dslashMovementDuration: 6
-  dslashIFrameDuration: 6
+  dslashIFrameDuration: 16
   dslashExitVelocity: 14
   dslashHitbox: {fileID: 1621749703843480025}
   perfectDodgeObj: {fileID: 7897934967343794803, guid: e01fb87e90d791a41a68febf96d11d64, type: 3}

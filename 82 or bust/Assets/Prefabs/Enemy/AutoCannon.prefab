@@ -126,6 +126,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7504119392378384763}
+  - component: {fileID: 4032284025684804983}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -149,6 +150,29 @@ Transform:
   m_Father: {fileID: 7504119392717134721}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4032284025684804983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7504119392378384756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 623c802b529f73849802fbb50a685545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cdMin: 150
+  cdMax: 200
+  baseCd: 70
+  telegraphTime: 20
+  trfm: {fileID: 7504119392378384763}
+  firepoint: {fileID: 7504119391742275163}
+  aimRate: 0.1
+  playerVisible: 0
+  telegraphed: 0
+  bullet: {fileID: 4213405564715042583, guid: 4b9bbc8f5bcf1204ba828f84a83086fc, type: 3}
+  aimLine: {fileID: 9136745701334754067}
 --- !u!1 &7504119392717134723
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,7 +184,7 @@ GameObject:
   - component: {fileID: 7504119392717134721}
   - component: {fileID: 7504119392717134720}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: AutoCannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -215,8 +239,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7504119392728017976}
-  - component: {fileID: 7504119392728017983}
   - component: {fileID: 7504119392728017982}
+  - component: {fileID: 6712847856510274704}
   m_Layer: 7
   m_Name: Hurtbox
   m_TagString: Untagged
@@ -239,33 +263,6 @@ Transform:
   m_Father: {fileID: 7504119392717134721}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7504119392728017983
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7504119392728017977}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74ca57cc7b0b60844a5dbd8d4b0f1158, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HP: 100
-  maxHP: 0
-  entityID: 0
-  baseObj: {fileID: 7504119392717134723}
-  reflectionTrfm: {fileID: 7504119393023723876}
-  trfm: {fileID: 7504119392717134721}
-  rb: {fileID: 7504119392717134720}
-  knockbackFactor: 1
-  touchingTerrain: []
-  damageFX: {fileID: 3599978145258195593, guid: c0d593dc9cac19e40afbae67bda2476d, type: 3}
-  targetRange: 0
-  gunTrfm: {fileID: 7504119392378384763}
-  firepoint: {fileID: 7504119391742275163}
-  bullet: {fileID: 4213405564715042583, guid: 4b9bbc8f5bcf1204ba828f84a83086fc, type: 3}
-  aimLine: {fileID: 9136745701334754067}
 --- !u!61 &7504119392728017982
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -292,6 +289,30 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &6712847856510274704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7504119392728017977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 934eb4fbdcb82fa48ab493f8ecdb6a01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HP: 100
+  maxHP: 0
+  entityID: 0
+  baseObj: {fileID: 7504119392717134723}
+  reflectionTrfm: {fileID: 7504119393023723876}
+  trfm: {fileID: 7504119392717134721}
+  rb: {fileID: 7504119392717134720}
+  knockbackFactor: 1
+  touchingTerrain: []
+  damageFX: {fileID: 3599978145258195593, guid: c0d593dc9cac19e40afbae67bda2476d, type: 3}
+  targetRange: 0
+  armament: {fileID: 4032284025684804983}
 --- !u!1 &7504119393023723877
 GameObject:
   m_ObjectHideFlags: 0

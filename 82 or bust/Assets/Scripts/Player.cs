@@ -12,7 +12,7 @@ public class Player : MobileEntity
     [SerializeField] float jumpPower, doubleJumpPower;
     bool hasDJump;
 
-    int mana;
+    int mana; float maxMana;
     [SerializeField] int dashPower, dashMovementDuration, dashIFrameDuration, dashExitVelocity;
     [SerializeField] int dslashPower, dslashMovementDuration, dslashIFrameDuration, dslashExitVelocity;
     [SerializeField] Hitbox dslashHitbox;
@@ -39,7 +39,8 @@ public class Player : MobileEntity
     {
         base.Start();
 
-        AddMana(1000);
+        maxMana = 1500;
+        AddMana((int)maxMana);
     }
 
     private void Update()
@@ -157,7 +158,7 @@ public class Player : MobileEntity
 
     void HandleMana()
     {
-        if (mana < 1000)
+        if (mana < maxMana)
         {
             AddMana(5);
         }
@@ -166,8 +167,9 @@ public class Player : MobileEntity
     void AddMana(int amount)
     {
         mana += amount;
-        if (mana > 1000) { mana = 1000; }
-        manaScaler.SetTargetScale(mana * 0.001f, 0.5f);
+        if (mana > maxMana) { mana = (int)maxMana; }
+        if (mana < 0) { mana = 0; }
+        manaScaler.SetTargetScale(mana / maxMana, 0.5f);
     } 
 
     int dslashMovementTmr, dslashIFrameTmr;
@@ -191,8 +193,7 @@ public class Player : MobileEntity
             dslashHitbox.Activate(dslashMovementTmr);
             dslashHitbox.trfm.right = rb.velocity;
 
-            mana -= 500;
-            manaScaler.SetTargetScale(mana * 0.001f, 0.5f);
+            AddMana(-500);
         }
     }
 
@@ -219,7 +220,7 @@ public class Player : MobileEntity
     int dashMovementTmr, dashIFrameTmr;
     void DashRollCast()
     {
-        if (In.DashRollPressed() && mana >= 250 && dashMovementTmr < 1)
+        if (In.DashRollPressed() && mana >= 300 && dashMovementTmr < 1)
         {
             if (dashIFrameTmr < 1) { ToggleInvuln(true); }
             if (dashMovementTmr < 1) { movementLock++; }
@@ -232,8 +233,7 @@ public class Player : MobileEntity
 
             Instantiate(perfectDodgeObj, trfm.position, Quaternion.identity);
 
-            mana -= 250;
-            manaScaler.SetTargetScale(mana * 0.001f, 0.5f);
+            AddMana(-300);
         }
     }
     void HandleDashRoll()

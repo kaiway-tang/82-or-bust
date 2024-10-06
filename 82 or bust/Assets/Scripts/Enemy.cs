@@ -9,6 +9,7 @@ public class Enemy : MobileEntity
 
     [SerializeField] GameObject damageFX;
     [SerializeField] float targetRange;
+    [SerializeField] Armament armament;
 
     public static Player player;
 
@@ -52,6 +53,7 @@ public class Enemy : MobileEntity
     protected bool UpdatePlayerVisible()
     {
         playerVisible = Tools.PlayerVisible(trfm.position);
+        armament.playerVisible = playerVisible;
         return playerVisible;
     }
 

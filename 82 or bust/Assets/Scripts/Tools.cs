@@ -94,6 +94,7 @@ public class Tools : MonoBehaviour
     {
         emptyTrfm.position = trfm.position;
         emptyTrfm.right = targetPos - trfm.position;
+        if (offset != 0) { emptyTrfm.Rotate(Vector3.forward * offset); }
 
         trfm.rotation = Quaternion.Lerp(trfm.rotation, emptyTrfm.rotation, rate);
     }
