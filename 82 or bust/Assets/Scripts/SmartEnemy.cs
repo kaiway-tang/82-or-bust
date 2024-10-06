@@ -33,17 +33,17 @@ public class SmartEnemy : Enemy
         OnStateBegin(next);
     }
 
-    protected void OnStateBegin(EnemyStates state)
+    protected virtual void OnStateBegin(EnemyStates state)
     {
 
     }
 
-    protected void OnStateEnd(EnemyStates state)
+    protected virtual void OnStateEnd(EnemyStates state)
     {
 
     }
 
-    protected void OnStateUpdate(EnemyStates state, float curTime)
+    protected virtual void OnStateUpdate(EnemyStates state, float curTime)
     {
         switch (state)
         {
