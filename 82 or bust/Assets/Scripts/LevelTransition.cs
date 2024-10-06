@@ -21,7 +21,7 @@ public class LevelTransition : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         HPEntity ent = collision.GetComponent<HPEntity>();
-        if (ent && ent.entityID == 0)
+        if (ent && ent.entityID == 1)
         {
             StartCoroutine(TransitionLevel(collision.transform));
         }
