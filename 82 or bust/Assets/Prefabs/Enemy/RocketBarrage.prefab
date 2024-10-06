@@ -9,11 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7504119392378384763}
-  - component: {fileID: 3840844426789416073}
   - component: {fileID: 2163613771358761455}
   - component: {fileID: 50856355809389553}
   m_Layer: 0
-  m_Name: Gun
+  m_Name: Armament
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,28 +34,6 @@ Transform:
   m_Father: {fileID: 7504119392717134721}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3840844426789416073
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7504119392378384756}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78dc87a575d105f40a20039e8f7e07fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cdMin: 150
-  cdMax: 200
-  baseCd: 70
-  telegraphTime: 30
-  trfm: {fileID: 7504119392378384763}
-  firepoint: {fileID: 3370848023233843083}
-  aimRate: 0
-  playerVisible: 0
-  telegraphed: 0
-  rocket: {fileID: 8124404488934734147, guid: d80f6964203f1e94da35bb3914d634dd, type: 3}
 --- !u!212 &2163613771358761455
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -121,6 +98,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9ee2ba540cc8e44e83848b3a82dee8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cdMin: 200
+  cdMax: 250
+  baseCd: 70
+  telegraphTime: 30
+  trfm: {fileID: 7504119392378384763}
+  firepoint: {fileID: 3370848023233843083}
+  aimRate: 0.1
+  playerVisible: 0
+  telegraphed: 0
+  rocket: {fileID: 8124404488934734147, guid: d80f6964203f1e94da35bb3914d634dd, type: 3}
 --- !u!1 &7504119392717134723
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,7 +119,7 @@ GameObject:
   - component: {fileID: 7504119392717134721}
   - component: {fileID: 7504119392717134720}
   m_Layer: 0
-  m_Name: Barrage
+  m_Name: RocketBarrage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -260,7 +247,7 @@ MonoBehaviour:
   touchingTerrain: []
   damageFX: {fileID: 3599978145258195593, guid: c0d593dc9cac19e40afbae67bda2476d, type: 3}
   targetRange: 0
-  armament: {fileID: 3840844426789416073}
+  armament: {fileID: 50856355809389553}
 --- !u!1 &7504119393023723877
 GameObject:
   m_ObjectHideFlags: 0
@@ -426,11 +413,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8507050543102431249}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.419, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 1, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 7504119392378384763}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}

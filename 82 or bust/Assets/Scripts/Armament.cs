@@ -19,7 +19,7 @@ public class Armament : MonoBehaviour
 
     protected void Start()
     {
-        
+        cooldown = baseCd;
     }
 
     // Update is called once per frame

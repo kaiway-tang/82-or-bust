@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Test : MonoBehaviour
 {
-    [SerializeField] PosTracker postrack;
-    
-    void FixedUpdate()
+    [SerializeField] Transform target;
+    [SerializeField] NavMeshAgent agent;
+    private void FixedUpdate()
     {
-        transform.position = postrack.GetPredictedPosition(50);
+        agent.SetDestination(target.position);
     }
 }
