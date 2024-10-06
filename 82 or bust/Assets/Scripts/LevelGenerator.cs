@@ -12,20 +12,37 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] GameObject[] enemies;
     [SerializeField] GameObject[] bridge;
     [SerializeField] Tilemap curTilemap;
+    [SerializeField] Tile borderTile;
     [SerializeField] GameObject navMeshPrefab;
+    [SerializeField] GameObject breakRoomPrefab;
     [SerializeField] int chunkWidth = 15;
     [SerializeField] int chunkHeight = 10;
     NavMeshSurface navmesh;
     GameObject navMeshObj;
+    GameObject breakRoomObj;
     List<GameObject> chunks;
+    List<GameObject> startChunks;
+    List<GameObject> endChunks;
     int levelAnchorx = 0;
-    int levelAnchory = 0; 
+    int levelAnchory = 0;
 
-    // Start is called before the first frame update
+    public static LevelGenerator Instance;
+
+    private void Awake()
+    {
+        if (Instance)
+        {
+            Destroy(this);
+        }
+        Instance = this;
+    }
+
     void Start()
     {
         navmesh = GetComponent<NavMeshSurface>();
         chunks = new List<GameObject>();
+        startChunks = new List<GameObject>();
+        endChunks = new List<GameObject>();
         LoadChunks();
         GenerateLevel(3);
     }
@@ -40,7 +57,17 @@ public class LevelGenerator : MonoBehaviour
         {
             chunks.Add(chunk);
             Debug.Log("Loaded chunk: " + chunk.name);
-
+            if (chunk.CompareTag("EN-EX"))
+            {
+                startChunks.Add(chunk);
+                endChunks.Add(chunk);
+            } else if (chunk.CompareTag("EN"))
+            {
+                startChunks.Add(chunk);
+            } else if (chunk.CompareTag("EX"))
+            {
+                endChunks.Add(chunk);
+            }
         }
 
         if (chunks.Count == 0)
@@ -80,9 +107,23 @@ public class LevelGenerator : MonoBehaviour
         }
     }
 
-    void GenerateLevel(int size)
+    public void GenerateLevel(int size)
     {
-        curTilemap.ClearAllTiles();
+        ClearGeneration();
+        // Generate border
+        for (int j = 0; j < size * chunkHeight + 5; ++j)
+        {
+            curTilemap.SetTile(new Vector3Int(levelAnchorx, levelAnchory + j), borderTile);
+            curTilemap.SetTile(new Vector3Int(levelAnchorx + chunkWidth * size + 1, levelAnchory + j), borderTile);
+        }
+        for (int i = 0; i < size * chunkWidth + 2; ++i)
+        {
+            curTilemap.SetTile(new Vector3Int(levelAnchorx + i, levelAnchory), borderTile);
+            curTilemap.SetTile(new Vector3Int(levelAnchorx + i, levelAnchory + chunkHeight * size + 4), borderTile);
+        }
+        ++levelAnchorx;
+        ++levelAnchory;
+
         for (int j = 0; j < size; ++j)
         {
             for (int i = 0; i < size; ++i)
@@ -103,15 +144,32 @@ public class LevelGenerator : MonoBehaviour
         navMeshObj.transform.localScale = new Vector3((float)size * chunkWidth, (float)size * chunkHeight);
         navmesh.BuildNavMeshAsync();
 
-        levelAnchorx += size * chunkWidth;
-        levelAnchory += size * chunkHeight;
+        levelAnchorx += size * chunkWidth + 1;
+        levelAnchory += size * chunkHeight + 4;
+
+        // Spawn break room
+        // if (breakRoomObj) Destroy(breakRoomObj);  // Note: we don't want to delete break rooms like other stuff
+        breakRoomObj = Instantiate(breakRoomPrefab, new Vector3(levelAnchorx, levelAnchory), Quaternion.identity);
     }
 
-    void GenerateCell(int anchorx, int anchory)
+    void GenerateCell(int anchorx, int anchory, int requirement = 0)
     {
         // Use below function when system linked
         // Tilemap refMap = LeelManager.self.chunks[Random.Range(0, LevelManager.self.chunks.Length)].GetComponent<Tilemap>();
-        Chunk chunk = chunks[Random.Range(0, chunks.Count)].GetComponent<Chunk>();
+        Chunk chunk;
+        switch (requirement)
+        {
+            case 1:  // Entrance
+                chunk = startChunks[Random.Range(0, chunks.Count)].GetComponent<Chunk>();
+                break;
+            case 2:  // Exit
+                chunk = endChunks[Random.Range(0, chunks.Count)].GetComponent<Chunk>();
+                break;
+            default:  // Normal
+                chunk = chunks[Random.Range(0, chunks.Count)].GetComponent<Chunk>();
+                break;
+
+        }
         Tilemap refMap = chunk.tilemap;
         refMap.CompressBounds();
         for (int x = 0; x < chunkWidth; x++)
@@ -136,9 +194,8 @@ public class LevelGenerator : MonoBehaviour
         // SpawnEnemies(chunk, 3);
     }
 
-    // Update is called once per frame
-    void Update()
+    void ClearGeneration()
     {
-        
+        curTilemap.ClearAllTiles();
     }
 }
