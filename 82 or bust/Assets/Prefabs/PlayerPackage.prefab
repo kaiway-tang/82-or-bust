@@ -610,7 +610,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &8982719002657847051
@@ -641,7 +641,7 @@ Transform:
   m_GameObject: {fileID: 8982719002657847051}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8982719003872554817}
@@ -795,25 +795,25 @@ MonoBehaviour:
   touchingTerrain:
   - {fileID: 8982719002657847061}
   groundedFriction: 1.4
-  aerialFriction: 0
+  aerialFriction: 0.4
   groundedAcceleration: 3
   aerialAcceleration: 1.5
   maxSpeed: 9
   jumpPower: 18
-  doubleJumpPower: 12
+  doubleJumpPower: 18
   dashPower: 40
-  dashMovementDuration: 10
+  dashMovementDuration: 9
   dashIFrameDuration: 20
-  dashExitVelocity: 16
+  dashExitVelocity: 8
   dslashPower: 60
   dslashMovementDuration: 6
   dslashIFrameDuration: 6
-  dslashExitVelocity: 15
+  dslashExitVelocity: 14
   dslashHitbox: {fileID: 1621749703843480025}
-  perfectDodgeObj: {fileID: 0}
+  perfectDodgeObj: {fileID: 7897934967343794803, guid: e01fb87e90d791a41a68febf96d11d64, type: 3}
   manaScaler: {fileID: 1366978446964741502}
   hurtbox: {fileID: 8982719003436390473}
-  dJumpFX: {fileID: 0}
+  dJumpFX: {fileID: 6344769039350108699, guid: 4793de023a635e4468acf3ceb5a44266, type: 3}
   posTracker: {fileID: 8982719003872554819}
   movementLock: 0
 --- !u!61 &8982719003436390473
@@ -1011,7 +1011,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &8982719003664860365
@@ -1115,6 +1115,7 @@ GameObject:
   - component: {fileID: 8982719003762073829}
   - component: {fileID: 8982719003762073830}
   - component: {fileID: 595607459}
+  - component: {fileID: 2021531033}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1164,6 +1165,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _exclamation: {fileID: 3090734774056455368, guid: 4975efaa2b8406a4fa539c0bd84b9583, type: 3}
+--- !u!114 &2021531033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8982719003762073828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b85d2fb67bd27334cb40d2814434defc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grid: {fileID: 0}
+  chunks:
+  - {fileID: 6958129721928276429, guid: 4bf172110498c994a834d22dc5426e72, type: 3}
+  - {fileID: 4396000640099476994, guid: ba5cc5a7f5e3eb542a9eeb40a582712e, type: 3}
+  - {fileID: 5364833611591889927, guid: 0d41a04b34435134f847cad1ceac8d5f, type: 3}
+  - {fileID: 1918569735539021022, guid: 34e673ae522c5734e88e0c3e19c729f4, type: 3}
+  - {fileID: 3783069203771402536, guid: b1efce06c8383cf4f9744f51b0930218, type: 3}
 --- !u!1 &8982719003818690563
 GameObject:
   m_ObjectHideFlags: 0
@@ -1493,7 +1513,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8982719004056221067}
-  - component: {fileID: 8982719004056221076}
+  - component: {fileID: 3293249969170605768}
   m_Layer: 0
   m_Name: TerrainCollider
   m_TagString: Untagged
@@ -1516,8 +1536,8 @@ Transform:
   m_Father: {fileID: 8982719003872554817}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &8982719004056221076
-BoxCollider2D:
+--- !u!58 &3293249969170605768
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1525,20 +1545,10 @@ BoxCollider2D:
   m_GameObject: {fileID: 8982719004056221066}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: f3ea55f1f3bfb644097b33209c77b433, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Radius: 0.5

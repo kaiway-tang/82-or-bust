@@ -167,7 +167,7 @@ public class Player : MobileEntity
     {
         mana += amount;
         if (mana > 1000) { mana = 1000; }
-        manaScaler.SetTargetScale(mana * 0.001f, 0.3f);
+        manaScaler.SetTargetScale(mana * 0.001f, 0.5f);
     } 
 
     int dslashMovementTmr, dslashIFrameTmr;
@@ -192,7 +192,7 @@ public class Player : MobileEntity
             dslashHitbox.trfm.right = rb.velocity;
 
             mana -= 500;
-            manaScaler.SetTargetScale(mana * 0.001f, 0.3f);
+            manaScaler.SetTargetScale(mana * 0.001f, 0.5f);
         }
     }
 
@@ -233,7 +233,7 @@ public class Player : MobileEntity
             Instantiate(perfectDodgeObj, trfm.position, Quaternion.identity);
 
             mana -= 250;
-            manaScaler.SetTargetScale(mana * 0.001f, 0.3f);
+            manaScaler.SetTargetScale(mana * 0.001f, 0.5f);
         }
     }
     void HandleDashRoll()

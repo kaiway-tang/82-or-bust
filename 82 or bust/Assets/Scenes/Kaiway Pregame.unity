@@ -556,17 +556,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7694997055597422191, guid: 2201f553d13671b4dbfad1fe7ee67530, type: 3}
-      propertyPath: m_Enabled
-      value: 0
+    - target: {fileID: 8982719003436390472, guid: 2201f553d13671b4dbfad1fe7ee67530, type: 3}
+      propertyPath: jumpPower
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8982719003436390472, guid: 2201f553d13671b4dbfad1fe7ee67530, type: 3}
-      propertyPath: perfectDodgeObj
-      value: 
-      objectReference: {fileID: 7897934967343794803, guid: e01fb87e90d791a41a68febf96d11d64, type: 3}
-    - target: {fileID: 8982719003436390472, guid: 2201f553d13671b4dbfad1fe7ee67530, type: 3}
-      propertyPath: dslashExitVelocity
-      value: 20
+      propertyPath: doubleJumpPower
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 8982719003818690563, guid: 2201f553d13671b4dbfad1fe7ee67530, type: 3}
       propertyPath: m_Name

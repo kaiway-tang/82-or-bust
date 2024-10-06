@@ -70,7 +70,7 @@ public class Tools : MonoBehaviour
     public static int terrainMask = 1 << 8, hurtMask = 1 << 7;
     public static bool LineOfSight(Vector2 pos1, Vector2 pos2)
     {
-        return Physics2D.Linecast(pos1, pos2, terrainMask);
+        return !Physics2D.Linecast(pos1, pos2, terrainMask);
     }
 
     public static bool PlayerVisible(Vector2 pos)
