@@ -15,6 +15,8 @@ public class Nanobot : MobileEntity
     [SerializeField] int state = 0;
     const int SCATTERING = 0, SEEKING = 1, TRANSITION = 2;
 
+    int life;
+
     Transform trfm;
     Vector3 agentPos;
     /*
@@ -32,6 +34,9 @@ public class Nanobot : MobileEntity
         base.Start();
         trfm = transform;
         agent.transform.parent = null;
+
+        trfm.Rotate(Vector3.forward * Random.Range(-100, 101));
+        Scatter(trfm.position + trfm.up * -1, 250);
     }
 
     private void Update()
@@ -46,6 +51,7 @@ public class Nanobot : MobileEntity
     {
         base.FixedUpdate();
         Animate();
+        life++;
 
         if (state == SCATTERING)
         {
@@ -73,15 +79,27 @@ public class Nanobot : MobileEntity
         ApplyDirectionalFriction(friction);
     }
 
+    InactiveShell targetShell;
     public void Seek()
     {
+        SetTarget();
+
         agent.transform.position = trfm.position;
         agent.enabled = true;
         state = SEEKING;
     }
 
+    void SetTarget()
+    {
+        targetShell = LevelManager.GetClosestShell(trfm.position);
+        if (targetShell) { target = targetShell.trfm; }
+        else { target = LevelManager.self.defaultNanobotPos; }
+    }
+
     void HandleSeeking()
     {
+        if (!target) { SetTarget(); }
+
         agentPos = agent.transform.position;
         if (!Tools.InDistance(agentPos, trfm.position, .1f))
         {
@@ -98,6 +116,12 @@ public class Nanobot : MobileEntity
         ApplyDirectionalFriction(friction);
 
         Tools.FacePosition(trfm, agentPos, 0.1f, -90);
+
+        if (Tools.BoxDist(trfm.position, target.position) < .4f)
+        {
+            if (targetShell) { targetShell.CollectNanobot(); }            
+            Destroy(gameObject);
+        }
 
         agent.SetDestination(target.position);
     }
@@ -196,4 +220,25 @@ public class Nanobot : MobileEntity
         }
     }
 
+    [SerializeField] int damageTrauma;
+    [SerializeField] GameObject damageFX;
+    public override int TakeDamage(int amount, int sourceID)
+    {
+        if (life < 10) { return IGNORED; }
+        int result = base.TakeDamage(amount, sourceID);
+        if (result != HPEntity.IGNORED)
+        {
+            Instantiate(damageFX, trfm.position, Quaternion.identity);
+            if (result == HPEntity.DEAD)
+            {
+                CameraManager.SetTrauma(damageTrauma);
+                Destroy(baseObj);
+            }
+            else
+            {
+                CameraManager.SetTrauma(damageTrauma);
+            }
+        }
+        return result;
+    }
 }

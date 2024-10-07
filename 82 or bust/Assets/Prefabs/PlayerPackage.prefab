@@ -784,7 +784,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8467f3fb839355e4193d3ce5fcfa4274, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 9999
+  HP: 100
   maxHP: 0
   entityID: 1
   baseObj: {fileID: 8982719003872554823}
@@ -816,6 +816,7 @@ MonoBehaviour:
   hurtbox: {fileID: 8982719003436390473}
   dJumpFX: {fileID: 6344769039350108699, guid: 4793de023a635e4468acf3ceb5a44266, type: 3}
   posTracker: {fileID: 8982719003872554819}
+  terrainCol: {fileID: 0}
   movementLock: 0
 --- !u!61 &8982719003436390473
 BoxCollider2D:
@@ -1185,6 +1186,7 @@ MonoBehaviour:
   - {fileID: 5364833611591889927, guid: 0d41a04b34435134f847cad1ceac8d5f, type: 3}
   - {fileID: 1918569735539021022, guid: 34e673ae522c5734e88e0c3e19c729f4, type: 3}
   - {fileID: 3783069203771402536, guid: b1efce06c8383cf4f9744f51b0930218, type: 3}
+  defaultNanobotPos: {fileID: 0}
 --- !u!1 &8982719003818690563
 GameObject:
   m_ObjectHideFlags: 0

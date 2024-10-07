@@ -6,7 +6,7 @@ public class Enemy : MobileEntity
 {
     // player transform: GameManager.playerTrfm  OR  player.trfm
 
-    [SerializeField] GameObject damageFX;
+    [SerializeField] GameObject damageFX, nanobot;
     [SerializeField] float targetRange;
     [SerializeField] Armament armament;
     [SerializeField] int damageTrauma, deathTrauma;
@@ -39,6 +39,10 @@ public class Enemy : MobileEntity
             if (result == HPEntity.DEAD)
             {
                 CameraManager.SetTrauma(deathTrauma);
+                for (int i = 0; i < 3; i++)
+                {
+                    Instantiate(nanobot, trfm.position, Quaternion.identity);
+                }
                 Destroy(baseObj);
             }
             else

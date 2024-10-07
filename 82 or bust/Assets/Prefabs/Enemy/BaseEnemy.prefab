@@ -213,6 +213,7 @@ MonoBehaviour:
   knockbackFactor: 1
   touchingTerrain: []
   damageFX: {fileID: 3599978145258195593, guid: c0d593dc9cac19e40afbae67bda2476d, type: 3}
+  nanobot: {fileID: 6490564406242932604, guid: e2d82c87a67f89c4295760cd4763555a, type: 3}
   targetRange: 0
   armament: {fileID: 0}
   damageTrauma: 0

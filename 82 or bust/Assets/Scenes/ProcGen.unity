@@ -169,6 +169,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &478617286 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8982719003762073829, guid: 2201f553d13671b4dbfad1fe7ee67530, type: 3}
+  m_PrefabInstance: {fileID: 1946984289}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1168133194
 GameObject:
   m_ObjectHideFlags: 0
@@ -20145,7 +20150,9 @@ MonoBehaviour:
   - {fileID: 5667278724523582868, guid: fa06d694300251748b0284399184979a, type: 3}
   - {fileID: 1564970704707622062, guid: 471200ece2d3eee40bd9c8e010afcc78, type: 3}
   curTilemap: {fileID: 1168133197}
+  borderTile: {fileID: 0}
   navMeshPrefab: {fileID: 7396198255192271618, guid: 863e560ee60d6ff4199562b324dee89f, type: 3}
+  breakRoomPrefab: {fileID: 0}
   chunkWidth: 30
   chunkHeight: 18
 --- !u!114 &1300539372
@@ -20324,6 +20331,10 @@ PrefabInstance:
       propertyPath: grid
       value: 
       objectReference: {fileID: 133370678}
+    - target: {fileID: 2021531033, guid: 2201f553d13671b4dbfad1fe7ee67530, type: 3}
+      propertyPath: defaultNanobotPos
+      value: 
+      objectReference: {fileID: 478617286}
     - target: {fileID: 8982719003818690563, guid: 2201f553d13671b4dbfad1fe7ee67530, type: 3}
       propertyPath: m_Name
       value: PlayerPackage
@@ -20334,11 +20345,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8982719003818690574, guid: 2201f553d13671b4dbfad1fe7ee67530, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.03
+      value: 2.77
       objectReference: {fileID: 0}
     - target: {fileID: 8982719003818690574, guid: 2201f553d13671b4dbfad1fe7ee67530, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.89
+      value: 7.71
       objectReference: {fileID: 0}
     - target: {fileID: 8982719003818690574, guid: 2201f553d13671b4dbfad1fe7ee67530, type: 3}
       propertyPath: m_LocalPosition.z

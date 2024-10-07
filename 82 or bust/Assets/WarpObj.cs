@@ -38,7 +38,7 @@ public class WarpObj : MonoBehaviour
 
     void EndWarp()
     { 
-        locomotor.EndWarp();
+        if (locomotor) { locomotor.EndWarp(); } else { Destroy(gameObject); }
         gameObject.SetActive(false);
     }
 }

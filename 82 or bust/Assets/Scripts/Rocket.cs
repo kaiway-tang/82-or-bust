@@ -28,11 +28,14 @@ public class Rocket : MonoBehaviour
         Tools.FacePosition(trfm, Player.self.trfm.position, turnSpeed * speed, -90);
     }
 
+    bool detonated = false;
     private void OnTriggerEnter2D(Collider2D col)
     {
+        if (detonated) { return; }
         if (Layers.AnyCollision(col.gameObject.layer))
         {
             Instantiate(explosion, trfm.position, Quaternion.identity);
+            detonated = true;
             Destroy(gameObject);
         }
     }

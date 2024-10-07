@@ -21,6 +21,7 @@ public class Locomotor : MobileEntity
     {
         base.Start();
         warpCD = 100;
+        playerVisible = false;
     }
 
     new void FixedUpdate()
@@ -138,6 +139,7 @@ public class Locomotor : MobileEntity
 
     public void EndWarp()
     {
+        if (!trfm) { return; }
         vect3 = warpObj.trfm.position;
         vect3.z = 0;
         trfm.position = vect3;

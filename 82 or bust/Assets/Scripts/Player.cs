@@ -26,6 +26,7 @@ public class Player : MobileEntity
 
     Vector3 mousePos;
     [SerializeField] PosTracker posTracker;
+    public Collider2D terrainCol;
 
     private void Awake()
     {

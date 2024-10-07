@@ -23,7 +23,7 @@ public class LevelTransition : MonoBehaviour
         HPEntity ent = collision.GetComponent<HPEntity>();
         if (ent && ent.entityID == 1)
         {
-            StartCoroutine(TransitionLevel(collision.transform));
+            StartCoroutine(TransitionLevel(ent.baseObj.transform));
         }
     }
 
@@ -38,7 +38,7 @@ public class LevelTransition : MonoBehaviour
         // Un slow player
         Time.timeScale = origScale;
         // Move player to within break room
-        Collider2D playerCol = player.GetComponent<Collider2D>();
+        Collider2D playerCol = Player.self.terrainCol;
         playerCol.enabled = false;
         while (Vector3.Distance(player.position, spawnPoint.position) > 0.1f)
         {
