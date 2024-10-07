@@ -17,8 +17,18 @@ public class GameManager : MonoBehaviour
     public static PosTracker playerPosTracker;
 
     public int difficulty = 0;
-
-    public int score = 0;
+    public bool playerDead = false;
+    private int _score = 0;
+    public int score {
+        get
+        {
+            return _score;
+        }
+        set
+        {
+            if (!playerDead) score = value;
+        }
+    }
 
     private void Awake()
     {
@@ -66,6 +76,7 @@ public class GameManager : MonoBehaviour
     public void EndGame()
     {
         EndUI.SetActive(true);
+        playerDead = true;
     }
 
     public void Restart()
