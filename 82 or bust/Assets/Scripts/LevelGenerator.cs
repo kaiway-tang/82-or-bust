@@ -46,8 +46,6 @@ public class LevelGenerator : MonoBehaviour
         startChunks = new List<GameObject>();
         endChunks = new List<GameObject>();
         LoadChunks();
-        breakRoomObj = Instantiate(breakRoomPrefab, new Vector3(levelAnchorx, levelAnchory), Quaternion.identity);
-        Player.self.trfm.position = new Vector3(levelAnchorx - 10f, levelAnchory + 3f);
         GenerateLevel(3);
     }
 
