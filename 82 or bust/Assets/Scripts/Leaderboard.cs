@@ -18,6 +18,8 @@ public class Leaderboard : MonoBehaviour
 
     [SerializeField] TMP_Text leaderboardDisplay;
     [SerializeField] TMP_Text scoreDisplay;
+    [SerializeField] TMP_Text loserName;
+    [SerializeField] TMP_Text loserScore;
     [SerializeField] TMP_InputField nameInput;
     [SerializeField] TMP_Text runSummary;
     [SerializeField] TMP_Text finalScore;
@@ -30,6 +32,7 @@ public class Leaderboard : MonoBehaviour
     private void OnEnable()
     {
         StartCoroutine(GetRequest());
+        StartCoroutine(GetRequest(true));
         finalScore.text = GameManager.self.score.ToString();
         Cursor.lockState = CursorLockMode.None;
     }
@@ -58,6 +61,7 @@ public class Leaderboard : MonoBehaviour
             {
                 Debug.Log("Form upload complete!");
                 StartCoroutine(GetRequest());
+                StartCoroutine(GetRequest(true));
             }
         }
     }
@@ -84,7 +88,7 @@ public class Leaderboard : MonoBehaviour
                     break;
                 case UnityWebRequest.Result.Success:
                     Debug.Log(pages[page] + ":\nReceived: " + webRequest.downloadHandler.text);
-                    DisplayResults(webRequest.downloadHandler.text);
+                    DisplayResults(webRequest.downloadHandler.text, !ascending);
                     break;
             }
         }
@@ -110,7 +114,7 @@ public class Leaderboard : MonoBehaviour
         SceneManager.LoadScene("StartScene");
     }
 
-    void DisplayResults(string res)
+    void DisplayResults(string res, bool leader = true)
     {
         // Split the CSV into lines
         string[] lines = res.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
@@ -144,8 +148,15 @@ public class Leaderboard : MonoBehaviour
                 break;
             }
         }
-
-        leaderboardDisplay.text = displayText;
-        scoreDisplay.text = scoreText;
+        if (leader)
+        {
+            leaderboardDisplay.text = displayText;
+            scoreDisplay.text = scoreText;
+        } else
+        {
+            loserName.text = displayText;
+            loserScore.text = scoreText;
+        }
+        
     }
 }
