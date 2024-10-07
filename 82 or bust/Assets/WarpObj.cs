@@ -8,6 +8,7 @@ public class WarpObj : MonoBehaviour
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Locomotor locomotor;
     public Transform trfm;
+    [SerializeField] SpriteRenderer rend;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,11 +20,21 @@ public class WarpObj : MonoBehaviour
     {
         gameObject.SetActive(true);
         trfm.parent = null;
+        trail.emitting = true;
+        rend.enabled = true;
+        ptclSys.Play();
         timer = 150;
     }
 
     private void FixedUpdate()
     {
+        if (objDisableDelay > 0)
+        {
+            objDisableDelay--;
+            if (objDisableDelay == 0) { gameObject.SetActive(false); }
+            return;
+        }
+
         agent.SetDestination(Player.self.trfm.position);
         if (Tools.BoxDist(trfm.position, Player.self.trfm.position) < 2)
         {
@@ -34,11 +45,22 @@ public class WarpObj : MonoBehaviour
         {
             EndWarp();
         }
+
+        
     }
 
+    int objDisableDelay;
+    [SerializeField] TrailRenderer trail;
+    [SerializeField] ParticleSystem ptclSys;
+    [SerializeReference] GameObject warpEndFX;
     void EndWarp()
     { 
         if (locomotor) { locomotor.EndWarp(); } else { Destroy(gameObject); }
-        gameObject.SetActive(false);
+        rend.enabled = false;
+        trail.emitting = false;
+        ptclSys.Stop();
+        objDisableDelay = 25;
+        Instantiate(warpEndFX, trfm.position, Quaternion.identity);
+        //gameObject.SetActive(false);
     }
 }

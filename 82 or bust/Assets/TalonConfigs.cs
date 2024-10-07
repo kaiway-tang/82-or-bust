@@ -15,6 +15,7 @@ public class TalonConfigs : MonoBehaviour
     }
     public void SetDodgeTalons()
     {
+        return;
         Vector3 mouseVect = CursorObj.trfm.position - trfm.position;
         trfm.up = mouseVect;
 

@@ -19,6 +19,9 @@ public class Locomotor : MobileEntity
     [SerializeField] int state;
     const int ROAMING = 0, ENGAGED = 1, DISENGAGED = 2, WARPING = 3;
     // Start is called before the first frame update
+
+    [SerializeField] float spinSpd;
+    [SerializeField] protected Transform ball;
     new void Start()
     {
         base.Start();
@@ -80,10 +83,14 @@ public class Locomotor : MobileEntity
             {
                 ApplyXFriction(friction);
                 AddForwardXVelocity(-accl, -maxSpeed);
+                Spin();
             }
             if (playerVisible)
             {
-                if (!ledged) { AddForwardXVelocity(accl, maxSpeed); }
+                if (!ledged) {
+                    AddForwardXVelocity(accl, maxSpeed);
+                    Spin();
+                }
             }
             else if (!armament.telegraphed && armament.fireTmr < 1)
             {
@@ -91,6 +98,20 @@ public class Locomotor : MobileEntity
                 state = DISENGAGED;
             }
         }
+    }
+
+    float curSpin;
+    void Spin()
+    {
+        if (IsFacingLeft())
+        {
+            if (curSpin < spinSpd) { curSpin += spinSpd * 0.1f; }
+        }
+        else
+        {
+            if (curSpin > -spinSpd) { curSpin -= spinSpd * 0.1f; }
+        }
+        ball.Rotate(Vector3.forward * curSpin);
     }
 
     void HandleDisengaged()

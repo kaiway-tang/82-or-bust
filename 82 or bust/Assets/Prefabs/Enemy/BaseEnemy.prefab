@@ -26,8 +26,8 @@ Transform:
   m_GameObject: {fileID: 5994554208938174190}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.027125431}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.36, y: 0.36, z: 0.36}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5994554209245066250}
   m_RootOrder: 1
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 37fcb428bbced5346a31a60fba7c57a3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c312d94f0ec89e24093b2e3012d6fc74, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -244,7 +244,7 @@ Transform:
   m_GameObject: {fileID: 5994554209245066248}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.05, y: -2.48, z: -0.027125431}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5994554209238107059}
@@ -282,14 +282,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5994554209245066250}
     m_Modifications:
-    - target: {fileID: 506302180424981864, guid: ef9a268dea3df8b4d86f9ce9572c82d9, type: 3}
-      propertyPath: m_Speed
-      value: 24
-      objectReference: {fileID: 0}
-    - target: {fileID: 506302180424981864, guid: ef9a268dea3df8b4d86f9ce9572c82d9, type: 3}
-      propertyPath: m_Radius
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 506302181847090129, guid: ef9a268dea3df8b4d86f9ce9572c82d9, type: 3}
       propertyPath: m_Name
       value: Locomotor
@@ -298,6 +290,10 @@ PrefabInstance:
       propertyPath: rb
       value: 
       objectReference: {fileID: 5994554209245066251}
+    - target: {fileID: 506302181847090131, guid: ef9a268dea3df8b4d86f9ce9572c82d9, type: 3}
+      propertyPath: ball
+      value: 
+      objectReference: {fileID: 5994554208938174191}
     - target: {fileID: 506302181847090131, guid: ef9a268dea3df8b4d86f9ce9572c82d9, type: 3}
       propertyPath: trfm
       value: 
