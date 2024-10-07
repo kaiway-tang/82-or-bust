@@ -23,7 +23,7 @@ public class WarpObj : MonoBehaviour
         trail.emitting = true;
         rend.enabled = true;
         ptclSys.Play();
-        timer = 150;
+        timer = 100 + 50 * GameManager.self.difficulty;
     }
 
     private void FixedUpdate()

@@ -7,14 +7,19 @@ public class Key : MonoBehaviour
     public Gate gate;
     public Vector3 hidingPoint;
     [SerializeReference] int state = 0;
-    const int START = 0, HIDING = 1, IDLE = 2, COLLECTING = 3;
+    const int START = 0, HIDING = 1, IDLE = 2, COLLECTING = 3, UNLOCKING = 4;
     [SerializeField] float collectSpeed;
     [SerializeField] GameObject breakWall;
     Transform trfm;
 
+    [SerializeField] SpriteRenderer ringRend;
+
+    int reqCap, curCap;
+
     void Start()
     {
         trfm = transform;
+        reqCap = 50 + GameManager.self.difficulty * 50;
     }
 
     // Update is called once per frame
@@ -43,8 +48,18 @@ public class Key : MonoBehaviour
             {
                 state = COLLECTING;
             }
+            if (curCap > 0) { curCap--; }
         }
         if (state == COLLECTING)
+        {
+            if (Tools.BoxDist(trfm.position, Player.self.trfm.position) < 2)
+            {
+                state = IDLE;
+            }
+            curCap++;
+            if (curCap >= reqCap) { state = UNLOCKING; }
+        }
+        if (state == UNLOCKING)
         {
             trfm.position += (gate.trfm.position - trfm.position).normalized * collectSpeed;
             if (Tools.BoxDist(trfm.position, gate.trfm.position) < 1)

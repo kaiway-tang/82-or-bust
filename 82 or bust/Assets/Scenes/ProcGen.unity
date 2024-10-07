@@ -20224,8 +20224,8 @@ MonoBehaviour:
   borderTile: {fileID: 11400000, guid: a4f1e72ce6d14c54083e8ae4f4a0a64c, type: 2}
   navMeshPrefab: {fileID: 7396198255192271618, guid: 863e560ee60d6ff4199562b324dee89f, type: 3}
   breakRoomPrefab: {fileID: 7911542684392735676, guid: 502ce417a0a87f840921017c47b6bb62, type: 3}
-  breakRoomWidth: 30
-  breakRoomHeight: 10
+  breakRoomWidth: 10
+  breakRoomHeight: 7
   chunkWidth: 30
   chunkHeight: 18
   SpawnPositions: []

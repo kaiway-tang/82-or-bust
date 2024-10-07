@@ -171,6 +171,6 @@ public class Locomotor : MobileEntity
 
         baseObj.SetActive(true);
         state = ROAMING;
-        warpCD = 100;
+        warpCD = Mathf.RoundToInt(50 + (100f/GameManager.self.difficulty));
     }
 }
