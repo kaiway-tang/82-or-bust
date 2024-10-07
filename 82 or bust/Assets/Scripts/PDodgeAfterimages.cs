@@ -46,7 +46,7 @@ public class PDodgeAfterimages : MonoBehaviour
             int ctr = 0;
             foreach (GameObject afterimage in images)
             {
-                if (Vector3.SqrMagnitude(afterimage.transform.position - target.position) < 1f)
+                if (Vector3.SqrMagnitude(afterimage.transform.position - transform.position) < 1f)
                 {
                     ctr++;
                 }
