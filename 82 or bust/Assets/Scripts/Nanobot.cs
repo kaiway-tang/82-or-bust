@@ -243,6 +243,7 @@ public class Nanobot : MobileEntity
             {
                 CameraManager.SetTrauma(damageTrauma);
                 GameManager.self.score += score;
+                //Player.self.Heal(5);
                 Destroy(baseObj);
             }
             else
