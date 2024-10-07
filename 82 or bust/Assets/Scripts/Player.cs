@@ -20,7 +20,7 @@ public class Player : MobileEntity
     [SerializeField] GameObject perfectDodgeObj;
     [SerializeField] PlayerEffectsController fxController;
 
-    [SerializeField] Scaler manaScaler;
+    [SerializeField] Scaler manaScaler, hpScaler;
     [SerializeField] Collider2D hurtbox;
 
     [SerializeField] GameObject dJumpFX;
@@ -57,6 +57,7 @@ public class Player : MobileEntity
     new void FixedUpdate()
     {
         base.FixedUpdate();
+        hpScaler.SetScale(HP / 100f);
 
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + Vector3.forward * 10;
 
@@ -305,6 +306,13 @@ public class Player : MobileEntity
 
     #endregion
 
+    public void Heal(int amount)
+    {
+        HP += amount;
+        if (HP > maxHP) { HP = maxHP; }
+        hpScaler.SetScale(HP / 100f);
+    }
+
     public override int TakeDamage(int amount, int sourceID)
     {
         if (sourceID != 0 && sourceID == entityID) { return IGNORED; }
@@ -313,6 +321,9 @@ public class Player : MobileEntity
         CameraManager.SetTrauma(Mathf.Min(30, amount));
 
         int result = base.TakeDamage(amount, sourceID);
+
+        hpScaler.SetScale(HP/100f);
+
         if (result == DEAD)
         {
             baseObj.SetActive(false);
