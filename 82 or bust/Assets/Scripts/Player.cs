@@ -143,6 +143,7 @@ public class Player : MobileEntity
 
     void HandleFacing()
     {
+        return;
         if (trfm.position.x < mousePos.x)
         {
             FaceRight();

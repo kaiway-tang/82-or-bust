@@ -20,7 +20,6 @@ public class Nanobot : MobileEntity
 
     int life;
 
-    Transform trfm;
     Vector3 agentPos;
     /*
      * If idle, transition into move state

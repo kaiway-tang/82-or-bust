@@ -12,6 +12,7 @@ public class PlayerEffectsController : MonoBehaviour
     Transform trfm;
 
     [SerializeField] TalonConfigs talons;
+    [SerializeField] Transform spriteTrfm;
 
     public void PlayDodgeFX()
     {
@@ -29,6 +30,7 @@ public class PlayerEffectsController : MonoBehaviour
 
     public void PlayDSlashFX()
     {
+        talons.SetDSlashTalons();
         dslashTrail.emitting = true;
         dslashTmr = 6;
     }
@@ -42,6 +44,7 @@ public class PlayerEffectsController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        spriteTrfm.right = CursorObj.trfm.position - trfm.position;
         if (dslashTmr > 0)
         {
             dslashTmr--;

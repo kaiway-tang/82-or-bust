@@ -19,7 +19,8 @@ public class Key : MonoBehaviour
     void Start()
     {
         trfm = transform;
-        reqCap = 50 + GameManager.self.difficulty * 50;
+        //reqCap = 50 + GameManager.self.difficulty * 50;
+        reqCap = 10;
     }
 
     // Update is called once per frame

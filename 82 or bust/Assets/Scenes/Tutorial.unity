@@ -21785,6 +21785,26 @@ PrefabInstance:
       propertyPath: defaultNanobotPos
       value: 
       objectReference: {fileID: 478617286}
+    - target: {fileID: 2794681225711076052, guid: 2201f553d13671b4dbfad1fe7ee67530, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3522004679563419424, guid: 2201f553d13671b4dbfad1fe7ee67530, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4113372899196332244, guid: 2201f553d13671b4dbfad1fe7ee67530, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5105915515109271740, guid: 2201f553d13671b4dbfad1fe7ee67530, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5968668587305131944, guid: 2201f553d13671b4dbfad1fe7ee67530, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6358153139306544509, guid: 2201f553d13671b4dbfad1fe7ee67530, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -21792,6 +21812,10 @@ PrefabInstance:
     - target: {fileID: 6704014855238290835, guid: 2201f553d13671b4dbfad1fe7ee67530, type: 3}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8368353727361849702, guid: 2201f553d13671b4dbfad1fe7ee67530, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8982719003762073828, guid: 2201f553d13671b4dbfad1fe7ee67530, type: 3}
       propertyPath: m_IsActive
