@@ -8,16 +8,30 @@ public class AudioController : MonoBehaviour
     // Reference to the AudioMixer
     public AudioMixer audioMixer;
     [SerializeField] AudioSource sfx;
+    [SerializeField] AudioSource bgm1;
+    [SerializeField] AudioSource bgm2;
+    [SerializeField] AudioSource restbgm;
     [SerializeField] float normalFrequency = 22000f;
     [SerializeField] float lowpassFrequency = 1500f;
     [SerializeField] float lowpassDuration = 1.0f;
     [SerializeField] float recoveryFrequency = 300f;
+    [SerializeField] [Range(0f, 1f)] float blend = 0.5f;
+
+    float fightBGMVolume = 1f; 
 
     // The name of the parameter in the AudioMixer that controls the low pass filter's cutoff frequency
     public string lowPassParamName = "LowpassFreq";
 
-    // Desired cutoff frequency (10,000 Hz)
-    private float cutoffFrequency = 10000f;
+    public static AudioController Instance;
+
+    private void Awake()
+    {
+        if (Instance)
+        {
+            Destroy(gameObject);
+        }
+        Instance = this;
+    }
 
     void Start()
     {
@@ -31,6 +45,9 @@ public class AudioController : MonoBehaviour
         {
             Debug.LogError("AudioMixer is not assigned.");
         }
+
+        bgm1.Play();
+        bgm2.Play();
     }
 
     // Function to set the low pass filter's cutoff frequency
@@ -52,6 +69,10 @@ public class AudioController : MonoBehaviour
             StopAllCoroutines();
             StartCoroutine(LowpassFadeIn());
         }
+
+        bgm1.volume = blend * fightBGMVolume;
+        bgm2.volume = (1 - blend) * fightBGMVolume;
+        restbgm.volume = 1 - fightBGMVolume; 
     }
 
     IEnumerator LowpassFadeIn()
@@ -68,5 +89,32 @@ public class AudioController : MonoBehaviour
         SetLowPassCutoffFrequency(normalFrequency);
     }
 
-    
+    public void FadeRestMusic(bool fadeIn)
+    {
+        StartCoroutine(BlendRestMusic(fadeIn));
+    }
+
+    IEnumerator BlendRestMusic(bool fadeIn, float rate = 1)
+    {
+        if (fadeIn)
+        {
+            restbgm.Play();
+            while (fightBGMVolume > 0)
+            {
+                fightBGMVolume -= Time.fixedDeltaTime * rate;
+                yield return new WaitForFixedUpdate();
+            }
+            fightBGMVolume = 0;
+        } else
+        {
+            bgm1.Play();
+            bgm2.Play();
+            while (fightBGMVolume < 1)
+            {
+                fightBGMVolume += Time.fixedDeltaTime * rate;
+                yield return new WaitForFixedUpdate();
+            }
+            fightBGMVolume = 1;
+        }
+    }
 }
