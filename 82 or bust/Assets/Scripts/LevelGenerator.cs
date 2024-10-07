@@ -16,6 +16,7 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] GameObject navMeshPrefab;
     [SerializeField] GameObject breakRoomPrefab;
     [SerializeField] int breakRoomWidth = 10;
+    [SerializeField] int breakRoomHeight = 10;
     [SerializeField] int chunkWidth = 15;
     [SerializeField] int chunkHeight = 10;
     NavMeshSurface navmesh;
@@ -114,8 +115,11 @@ public class LevelGenerator : MonoBehaviour
         // Generate border
         for (int j = 0; j < size * chunkHeight + 5; ++j)
         {
-            curTilemap.SetTile(new Vector3Int(levelAnchorx, levelAnchory + j), borderTile);
             curTilemap.SetTile(new Vector3Int(levelAnchorx + chunkWidth * size + 1, levelAnchory + j), borderTile);
+        }
+        for (int j = breakRoomHeight; j < size * chunkHeight + 5; ++j)
+        {
+            curTilemap.SetTile(new Vector3Int(levelAnchorx, levelAnchory + j), borderTile);
         }
         for (int i = 0; i < size * chunkWidth + 2; ++i)
         {
@@ -149,7 +153,7 @@ public class LevelGenerator : MonoBehaviour
         navmesh.BuildNavMeshAsync();
 
         levelAnchorx += size * chunkWidth + 1;
-        levelAnchory += size * chunkHeight + 4;
+        levelAnchory += size * chunkHeight + 3;
 
         // Spawn break room
         // if (breakRoomObj) Destroy(breakRoomObj);  // Note: we don't want to delete break rooms like other stuff
