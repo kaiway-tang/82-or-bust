@@ -9765,10 +9765,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c01fcc323551a944d89e4e061a56119d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 50
+  damage: 35
   entityID: 0
   hitboxCol: {fileID: 5184558920057485720}
   trfm: {fileID: 2457982617717632339}
+  trauma: 0
 --- !u!58 &5184558920057485720
 CircleCollider2D:
   m_ObjectHideFlags: 0

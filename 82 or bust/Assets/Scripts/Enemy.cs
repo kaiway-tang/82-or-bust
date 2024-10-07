@@ -13,6 +13,8 @@ public class Enemy : MobileEntity
 
     public static Player player;
 
+    [SerializeField] GameObject inactiveShell;
+
     bool hasPOI;
     Vector2 pointOfInterest;
 
@@ -43,6 +45,7 @@ public class Enemy : MobileEntity
                 {
                     Instantiate(nanobot, trfm.position, Quaternion.identity);
                 }
+                Instantiate(inactiveShell, trfm.position, Quaternion.identity);
                 Destroy(baseObj);
             }
             else

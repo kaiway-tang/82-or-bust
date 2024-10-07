@@ -71,7 +71,7 @@ public class Player : MobileEntity
 
     #region MOVEMENT
 
-    [SerializeField] int movementLock;
+    public int movementLock;
 
     void HandleHorizontalMovement()
     {
@@ -184,7 +184,7 @@ public class Player : MobileEntity
         }
     }
 
-    void AddMana(int amount)
+    public void AddMana(int amount)
     {
         mana += amount;
         if (mana > maxMana) { mana = (int)maxMana; }
@@ -243,7 +243,7 @@ public class Player : MobileEntity
     }
 
     int dashMovementTmr, dashIFrameTmr;
-    void DashRollCast()
+    public void DashRollCast()
     {
         if (In.DashRollPressed() && mana >= 300 && dashMovementTmr < 1)
         {

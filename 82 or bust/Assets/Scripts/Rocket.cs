@@ -6,7 +6,7 @@ public class Rocket : MonoBehaviour
 {
     [SerializeField] float accl, maxSpeed, minSpeed, turnSpeed;
     [SerializeField] GameObject explosion;
-    [SerializeField] float speed;
+    public float speed;
     Transform trfm;
     // Start is called before the first frame update
     void Start()
