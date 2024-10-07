@@ -86,8 +86,8 @@ public class AudioController : MonoBehaviour
         //    StartCoroutine(LowpassFadeIn());
         //}
 
-        bgm1.volume = blend * fightBGMVolume;
-        bgm2.volume = (1 - blend) * fightBGMVolume;
+        bgm2.volume = blend * fightBGMVolume;
+        bgm1.volume = (1 - blend) * fightBGMVolume;
         restbgm.volume = 1 - fightBGMVolume; 
     }
 
@@ -108,6 +108,23 @@ public class AudioController : MonoBehaviour
             freq += recoveryFrequency;
         }
         SetLowPassCutoffFrequency(normalFrequency);
+    }
+
+    public void ChangeMusicBlend(float amt)
+    {
+        StartCoroutine(BlendMusic(amt));
+    }
+
+    IEnumerator BlendMusic(float blendVal)
+    {
+        if (blendVal < 0) blendVal = 0;
+        if (blendVal > 1) blendVal = 1;
+
+        while (Mathf.Abs(blend - blendVal) > .05f)
+        {
+            blend = Mathf.Lerp(blend, blendVal, 0.1f);
+            yield return new WaitForFixedUpdate();
+        }
     }
 
     public void FadeRestMusic(bool fadeIn)

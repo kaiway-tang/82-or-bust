@@ -29,6 +29,8 @@ public class LevelGenerator : MonoBehaviour
     int levelAnchorx = 0;
     int levelAnchory = 0;
 
+    int levelDifficulty = 0;
+
     public static LevelGenerator Instance;
     public List<Vector3> SpawnPositions;
 
@@ -170,6 +172,7 @@ public class LevelGenerator : MonoBehaviour
             keys[i].gate = breakRoomObj.GetComponent<Breakroom>().gate;
         }
         keys = breakRoomObj.GetComponent<Breakroom>().keys;
+        levelDifficulty = 0;
         StartCoroutine(SpawnNanobots());
     }
 
@@ -226,9 +229,14 @@ public class LevelGenerator : MonoBehaviour
     {
         while (SpawnPositions.Count > 0)
         {
+            if (levelDifficulty < 10)
+            {
+                ++levelDifficulty;
+                AudioController.Instance.ChangeMusicBlend(0.1f * levelDifficulty);
+            }
             if (Random.Range(0, 11) < GameManager.self.difficulty)
             {
-                int amt = GameManager.self.difficulty * 5;
+                int amt = GameManager.self.difficulty * levelDifficulty;
                 for (int i = 0; i < amt; ++i)
                 {
                     Instantiate(nanobot, SpawnPositions[Random.Range(0, SpawnPositions.Count)], Quaternion.identity);
