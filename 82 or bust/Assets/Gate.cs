@@ -48,7 +48,7 @@ public class Gate : MonoBehaviour
 
         if (state == OPEN && Player.self.trfm.position.y > trfm.position.y)
         {
-            nextKey.gate = LevelGenerator.Instance.GenerateLevel(3).gate;
+            LevelGenerator.Instance.GenerateLevel(3);
             Close();
         }
     }

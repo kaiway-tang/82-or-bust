@@ -31,6 +31,8 @@ public class LevelGenerator : MonoBehaviour
     public static LevelGenerator Instance;
     public List<Vector3> SpawnPositions;
 
+    public List<Key> keys;
+
     private void Awake()
     {
         if (Instance)
@@ -112,7 +114,7 @@ public class LevelGenerator : MonoBehaviour
         }
     }
 
-    public Breakroom GenerateLevel(int size)
+    public void GenerateLevel(int size)
     {
         ClearGeneration();
         // Generate border
@@ -161,7 +163,12 @@ public class LevelGenerator : MonoBehaviour
         // Spawn break room
         // if (breakRoomObj) Destroy(breakRoomObj);  // Note: we don't want to delete break rooms like other stuff
         breakRoomObj = Instantiate(breakRoomPrefab, new Vector3(levelAnchorx, levelAnchory), Quaternion.identity);
-        return breakRoomObj.GetComponent<Breakroom>();
+
+        for (int i = 0; i < keys.Count; i++)
+        {
+            keys[i].gate = breakRoomObj.GetComponent<Breakroom>().gate;
+        }
+        keys = breakRoomObj.GetComponent<Breakroom>().keys;
     }
 
     void GenerateCell(int anchorx, int anchory, int requirement = 0)

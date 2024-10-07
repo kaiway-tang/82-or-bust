@@ -106,7 +106,7 @@ MonoBehaviour:
   gate: {fileID: 0}
   hidingPoint: {x: 0, y: 0, z: 0}
   state: 0
-  collectSpeed: 0
+  collectSpeed: 0.2
   breakWall: {fileID: 1307219866157586498}
 --- !u!212 &8062018258374620860
 SpriteRenderer:
@@ -709,6 +709,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gate: {fileID: 8842061001961573772}
+  keys:
+  - {fileID: 666843934}
 --- !u!1 &8528346687107870595
 GameObject:
   m_ObjectHideFlags: 0
