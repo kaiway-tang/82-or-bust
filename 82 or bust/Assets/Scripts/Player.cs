@@ -160,6 +160,7 @@ public class Player : MobileEntity
         CameraManager.SetDodgeVig(.15f);
         fxController.PlayPDodgeFX();
         AddMana(500);
+        AudioController.Instance.PlayPDodgeSound();
     }
 
     IEnumerator HandleDodgeFX()
@@ -215,7 +216,7 @@ public class Player : MobileEntity
             dslashHitbox.trfm.right = rb.velocity;
 
             fxController.PlayDSlashFX();
-
+            AudioController.Instance.PlaySlashSound();
             AddMana(-500);
         }
     }
@@ -260,7 +261,7 @@ public class Player : MobileEntity
             Instantiate(perfectDodgeObj, trfm.position, Quaternion.identity);
 
             fxController.PlayDodgeFX();
-
+            AudioController.Instance.PlayDashSound();
             AddMana(-300);
         }
     }

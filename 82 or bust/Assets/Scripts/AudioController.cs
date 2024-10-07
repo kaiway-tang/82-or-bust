@@ -5,6 +5,7 @@ using UnityEngine.Audio;
 
 public class AudioController : MonoBehaviour
 {
+    [SerializeField] List<AudioClip> audioClips;
     // Reference to the AudioMixer
     public AudioMixer audioMixer;
     [SerializeField] AudioSource sfx;
@@ -61,14 +62,29 @@ public class AudioController : MonoBehaviour
         }
     }
 
+    public void PlaySlashSound()
+    {
+        sfx.PlayOneShot(audioClips[0]);
+    }
+
+    public void PlayDashSound()
+    {
+        sfx.PlayOneShot(audioClips[1]);
+    }
+
+    public void PlayPDodgeSound()
+    {
+        sfx.PlayOneShot(audioClips[2]);
+    }
+
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            sfx.Play();
-            StopAllCoroutines();
-            StartCoroutine(LowpassFadeIn());
-        }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    sfx.Play();
+        //    StopAllCoroutines();
+        //    StartCoroutine(LowpassFadeIn());
+        //}
 
         bgm1.volume = blend * fightBGMVolume;
         bgm2.volume = (1 - blend) * fightBGMVolume;
