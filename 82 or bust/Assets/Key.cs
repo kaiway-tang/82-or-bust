@@ -26,6 +26,7 @@ public class Key : MonoBehaviour
             {
                 state = HIDING;
                 //set hidingPoint (vector 3)
+                hidingPoint = FindHidingSpot(); 
             }
         }
         if (state == HIDING)
@@ -52,5 +53,22 @@ public class Key : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+    }
+
+    Vector3 FindHidingSpot()
+    {
+        // Choose from furthest half from the key 
+        LevelGenerator.Instance.SpawnPositions.Sort(delegate(Vector3 x, Vector3 y)
+        {
+            if (Vector3.SqrMagnitude(x - transform.position) < Vector3.SqrMagnitude(y - transform.position))
+            {
+                return 1;
+            } else
+            {
+                return -1;
+            }
+        }
+        );
+        return LevelGenerator.Instance.SpawnPositions[Random.Range(0, LevelGenerator.Instance.SpawnPositions.Count / 2)];
     }
 }
