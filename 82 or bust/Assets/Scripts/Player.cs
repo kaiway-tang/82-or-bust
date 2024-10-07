@@ -154,7 +154,7 @@ public class Player : MobileEntity
 
     public void PerfectDodged()
     {
-        GameManager.SetSloMo(0.5f);
+        GameManager.SetSloMo(0.4f);
         AddMana(500);
     }
 
