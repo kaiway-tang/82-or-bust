@@ -11,6 +11,7 @@ public class Enemy : MobileEntity
     [SerializeField] Armament armament;
     [SerializeField] int damageTrauma, deathTrauma;
 
+    int difficulty;
     public static Player player;
 
     [SerializeField] GameObject inactiveShell;
@@ -23,6 +24,7 @@ public class Enemy : MobileEntity
         base.Start();
         if (damageTrauma == 0) { damageTrauma = 12;}
         if (deathTrauma == 0) { deathTrauma = 18; }
+        difficulty = GameManager.self.difficulty;
     }
 
     protected new void FixedUpdate()
@@ -30,6 +32,10 @@ public class Enemy : MobileEntity
         base.FixedUpdate();
 
         HandlePlayerTrackingUpdates();
+        if (GameManager.self.difficulty > difficulty)
+        {
+            Destroy(baseObj);
+        }
     }
 
     public override int TakeDamage(int amount, int sourceID)

@@ -29,6 +29,7 @@ public class Nanobot : MobileEntity
      */
 
     // Start is called before the first frame update
+    int difficulty;
     new void Start()
     {
         base.Start();
@@ -37,6 +38,8 @@ public class Nanobot : MobileEntity
 
         trfm.Rotate(Vector3.forward * Random.Range(-100, 101));
         Scatter(trfm.position + trfm.up * -1, 250);
+
+        difficulty = GameManager.self.difficulty;
     }
 
     private void Update()
@@ -52,6 +55,11 @@ public class Nanobot : MobileEntity
         base.FixedUpdate();
         Animate();
         life++;
+
+        if (GameManager.self.difficulty > difficulty)
+        {
+            Destroy(baseObj);
+        }
 
         if (state == SCATTERING)
         {

@@ -9,9 +9,11 @@ public class InactiveShell : MonoBehaviour
     public int count;
     [SerializeField] ParticleSystem smoke;
     // Start is called before the first frame update
+    int difficulty;
     void Start()
     {
         LevelManager.self.NewShell(GetComponent<InactiveShell>());
+        difficulty = GameManager.self.difficulty;
     }
 
     public void CollectNanobot()
@@ -33,6 +35,11 @@ public class InactiveShell : MonoBehaviour
         {
             smokeTmr++;
             if (smokeTmr == 150) { smoke.Stop(); }            
+        }
+
+        if (GameManager.self.difficulty > difficulty)
+        {
+            Destroy(gameObject);
         }
     }
 }
