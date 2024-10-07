@@ -5,7 +5,7 @@ using UnityEngine;
 public class PDodgeAfterimages : MonoBehaviour
 {
     [SerializeField] GameObject image;
-    [SerializeField] int amount = 2;
+    [SerializeField] int amount = 3;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,7 +40,7 @@ public class PDodgeAfterimages : MonoBehaviour
         {
             foreach (GameObject afterimage in images)
             {
-                afterimage.transform.position = Vector3.MoveTowards(afterimage.transform.position, target.position, 30f * Time.fixedDeltaTime);
+                afterimage.transform.position = Vector3.MoveTowards(afterimage.transform.position, transform.position, 30f * Time.fixedDeltaTime);
                 // Debug.Log(target.position);
             }
             int ctr = 0;
@@ -62,7 +62,7 @@ public class PDodgeAfterimages : MonoBehaviour
         {
             foreach (GameObject afterimage in images)
             {
-                afterimage.transform.position = Vector3.MoveTowards(afterimage.transform.position, target.position, 30f * Time.fixedDeltaTime);
+                afterimage.transform.position = Vector3.MoveTowards(afterimage.transform.position, transform.position, 30f * Time.fixedDeltaTime);
                 afterimage.transform.localScale -= Vector3.one * .05f;
             }
             yield return new WaitForFixedUpdate();
