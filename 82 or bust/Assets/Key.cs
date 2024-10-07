@@ -6,7 +6,7 @@ public class Key : MonoBehaviour
 {
     public Gate gate;
     public Vector3 hidingPoint;
-    int state = 0;
+    [SerializeReference] int state = 0;
     const int START = 0, HIDING = 1, IDLE = 2, COLLECTING = 3;
     [SerializeField] float collectSpeed;
     [SerializeField] GameObject breakWall;
