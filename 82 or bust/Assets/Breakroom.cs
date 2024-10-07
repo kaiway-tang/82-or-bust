@@ -5,4 +5,5 @@ using UnityEngine;
 public class Breakroom : MonoBehaviour
 {
     public Gate gate;
+    public List<Key> keys;
 }

@@ -231,50 +231,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8982719003762073829, guid: 2201f553d13671b4dbfad1fe7ee67530, type: 3}
   m_PrefabInstance: {fileID: 1946984289}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &666843933
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 666843935}
-  - component: {fileID: 666843934}
-  m_Layer: 0
-  m_Name: Key
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &666843934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 666843933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b6df6759e95fc245a9712020c7b528f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &666843935
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 666843933}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.916992, y: 7.0943384, z: -0.14222616}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1168133194
 GameObject:
   m_ObjectHideFlags: 0
@@ -20195,6 +20151,17 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &1279395308 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 666843934, guid: 502ce417a0a87f840921017c47b6bb62, type: 3}
+  m_PrefabInstance: {fileID: 309820726}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b6df6759e95fc245a9712020c7b528f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1300539369
 GameObject:
   m_ObjectHideFlags: 0
@@ -20256,10 +20223,13 @@ MonoBehaviour:
   borderTile: {fileID: 11400000, guid: a4f1e72ce6d14c54083e8ae4f4a0a64c, type: 2}
   navMeshPrefab: {fileID: 7396198255192271618, guid: 863e560ee60d6ff4199562b324dee89f, type: 3}
   breakRoomPrefab: {fileID: 7911542684392735676, guid: 502ce417a0a87f840921017c47b6bb62, type: 3}
-  breakRoomWidth: 10
+  breakRoomWidth: 30
   breakRoomHeight: 10
   chunkWidth: 30
   chunkHeight: 18
+  SpawnPositions: []
+  keys:
+  - {fileID: 1279395308}
 --- !u!114 &1300539372
 MonoBehaviour:
   m_ObjectHideFlags: 0
