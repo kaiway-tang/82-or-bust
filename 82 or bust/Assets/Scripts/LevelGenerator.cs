@@ -229,11 +229,7 @@ public class LevelGenerator : MonoBehaviour
     {
         while (SpawnPositions.Count > 0)
         {
-            if (levelDifficulty < 10)
-            {
-                ++levelDifficulty;
-                AudioController.Instance.ChangeMusicBlend(0.1f * levelDifficulty);
-            }
+            AudioController.Instance.ChangeMusicBlend(0.1f * levelDifficulty);
             if (Random.Range(0, 11) < GameManager.self.difficulty)
             {
                 int amt = GameManager.self.difficulty * levelDifficulty;
@@ -243,6 +239,10 @@ public class LevelGenerator : MonoBehaviour
                 }
             }
             yield return new WaitForSecondsRealtime(10f);
+            if (levelDifficulty < 10)
+            {
+                ++levelDifficulty;
+            }
         }
     }
 }

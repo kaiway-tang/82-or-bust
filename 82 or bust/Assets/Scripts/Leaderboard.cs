@@ -31,6 +31,7 @@ public class Leaderboard : MonoBehaviour
     {
         StartCoroutine(GetRequest());
         finalScore.text = GameManager.self.score.ToString();
+        Cursor.lockState = CursorLockMode.None;
     }
 
     // Update is called once per frame
