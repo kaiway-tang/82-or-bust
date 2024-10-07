@@ -23,6 +23,7 @@ public class Player : MobileEntity
     [SerializeField] Collider2D hurtbox;
 
     [SerializeField] GameObject dJumpFX;
+    [SerializeField] SpriteRenderer sprite;
 
     Vector3 mousePos;
     [SerializeField] PosTracker posTracker;
@@ -156,6 +157,18 @@ public class Player : MobileEntity
     {
         GameManager.SetSloMo(0.4f);
         AddMana(500);
+    }
+
+    IEnumerator HandleDodgeFX()
+    {
+        GameManager.SetSloMo(0.25f);
+        AddMana(500);
+        sprite.enabled = false;
+        // Play sound
+        // Spawn effect
+        yield return new WaitForSecondsRealtime(0.3f);
+
+        sprite.enabled = true;
     }
 
     void HandleMana()
