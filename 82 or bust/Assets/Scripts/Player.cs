@@ -161,6 +161,7 @@ public class Player : MobileEntity
         fxController.PlayPDodgeFX();
         AddMana(500);
         AudioController.Instance.PlayPDodgeSound();
+        AudioController.Instance.PlayLowpassOneShot();
     }
 
     IEnumerator HandleDodgeFX()
