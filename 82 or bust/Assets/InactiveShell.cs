@@ -7,6 +7,7 @@ public class InactiveShell : MonoBehaviour
     public Transform trfm;
     public GameObject enemyObj;
     public int count;
+    [SerializeField] ParticleSystem smoke;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,5 +24,15 @@ public class InactiveShell : MonoBehaviour
     {
         Instantiate(enemyObj, trfm.position, Quaternion.identity);
         Destroy(gameObject);
+    }
+
+    int smokeTmr;
+    private void FixedUpdate()
+    {
+        if (smokeTmr < 150)
+        {
+            smokeTmr++;
+            if (smokeTmr == 150) { smoke.Stop(); }            
+        }
     }
 }

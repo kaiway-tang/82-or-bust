@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: a8cf010d468ce844dbdede5d1561913d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -171,7 +171,7 @@ MonoBehaviour:
   playerVisible: 0
   telegraphed: 0
   fireTmr: 0
-  rocket: {fileID: 8124404488934734147, guid: d80f6964203f1e94da35bb3914d634dd, type: 3}
+  rocket: {fileID: 8124404488934734147, guid: 20b730933e1a2ca4cb1230580ac71a2d, type: 3}
 --- !u!1001 &5775736350630127778
 PrefabInstance:
   m_ObjectHideFlags: 0

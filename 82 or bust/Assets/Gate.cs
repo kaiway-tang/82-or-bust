@@ -46,8 +46,9 @@ public class Gate : MonoBehaviour
             }
         }
 
-        if (state == OPEN && Player.self.trfm.position.y > trfm.position.y)
+        if (state == OPEN && Player.self.trfm.position.y > trfm.position.y + 1)
         {
+            Player.self.AddYVelocity(999, 40);
             LevelGenerator.Instance.GenerateLevel(3);
             Close();
         }
