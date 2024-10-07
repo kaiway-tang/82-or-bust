@@ -11,6 +11,7 @@ public class LevelGenerator : MonoBehaviour
 {
     [SerializeField] GameObject[] enemies;
     [SerializeField] GameObject[] bridge;
+    [SerializeField] GameObject nanobot;
     [SerializeField] Tilemap curTilemap;
     [SerializeField] RuleTile borderTile;
     [SerializeField] GameObject navMeshPrefab;
@@ -93,7 +94,7 @@ public class LevelGenerator : MonoBehaviour
         chunk.Init();
         for (int j = 0; j < chunk.spawnNodes.Count; j++)
         {
-            if (Random.Range(0, chunk.spawnNodes.Count) < 3)
+            if (Random.Range(0, 11) < GameManager.self.difficulty)
             { Instantiate(enemies[Random.Range(0, enemies.Length)], anchor + chunk.spawnNodes[j].transform.localPosition, Quaternion.identity); }
             SpawnPositions.Add(anchor + chunk.spawnNodes[j].transform.localPosition);
             // Destroy(chunk.spawnNodes[j].gameObject);
@@ -136,7 +137,7 @@ public class LevelGenerator : MonoBehaviour
         }
         ++levelAnchorx;
         ++levelAnchory;
-
+        GameManager.self.difficulty++;
         for (int j = 0; j < size; ++j)
         {
             for (int i = 0; i < size; ++i)
@@ -169,6 +170,7 @@ public class LevelGenerator : MonoBehaviour
             keys[i].gate = breakRoomObj.GetComponent<Breakroom>().gate;
         }
         keys = breakRoomObj.GetComponent<Breakroom>().keys;
+        StartCoroutine(SpawnNanobots());
     }
 
     void GenerateCell(int anchorx, int anchory, int requirement = 0)
@@ -216,6 +218,23 @@ public class LevelGenerator : MonoBehaviour
     void ClearGeneration()
     {
         curTilemap.ClearAllTiles();
-        SpawnPositions.Clear(); 
+        SpawnPositions.Clear();
+        StopAllCoroutines();
+    }
+
+    IEnumerator SpawnNanobots()
+    {
+        while (SpawnPositions.Count > 0)
+        {
+            if (Random.Range(0, 11) < GameManager.self.difficulty)
+            {
+                int amt = GameManager.self.difficulty * 5;
+                for (int i = 0; i < amt; ++i)
+                {
+                    Instantiate(nanobot, SpawnPositions[Random.Range(0, SpawnPositions.Count)], Quaternion.identity);
+                }
+            }
+            yield return new WaitForSecondsRealtime(10f);
+        }
     }
 }

@@ -14,9 +14,12 @@ public class GameManager : MonoBehaviour
     public static Transform playerTrfm;
     public static PosTracker playerPosTracker;
 
+    public int difficulty = 1;
+
     private void Awake()
     {
         exclamation = _exclamation;
+        self = GetComponent<GameManager>();
     }
 
     private void Start()
@@ -61,5 +64,6 @@ public class GameManager : MonoBehaviour
         assignID = 0;
         inSloMo = false;
         Time.timeScale = 1;
+        difficulty = 1;
     }
 }

@@ -1863,6 +1863,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5470761389455826688, guid: 9c91ea627cff9bd428a19274b427256e, type: 3}
+      propertyPath: nanobot
+      value: 
+      objectReference: {fileID: 6490564406242932604, guid: e2d82c87a67f89c4295760cd4763555a, type: 3}
+    - target: {fileID: 5470761389455826688, guid: 9c91ea627cff9bd428a19274b427256e, type: 3}
       propertyPath: curTilemap
       value: 
       objectReference: {fileID: 1271963639}
