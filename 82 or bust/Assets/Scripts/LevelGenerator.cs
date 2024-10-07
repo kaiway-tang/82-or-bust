@@ -12,9 +12,10 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] GameObject[] enemies;
     [SerializeField] GameObject[] bridge;
     [SerializeField] Tilemap curTilemap;
-    [SerializeField] Tile borderTile;
+    [SerializeField] RuleTile borderTile;
     [SerializeField] GameObject navMeshPrefab;
     [SerializeField] GameObject breakRoomPrefab;
+    [SerializeField] int breakRoomWidth = 10;
     [SerializeField] int chunkWidth = 15;
     [SerializeField] int chunkHeight = 10;
     NavMeshSurface navmesh;
@@ -119,6 +120,9 @@ public class LevelGenerator : MonoBehaviour
         for (int i = 0; i < size * chunkWidth + 2; ++i)
         {
             curTilemap.SetTile(new Vector3Int(levelAnchorx + i, levelAnchory), borderTile);
+        }
+        for (int i = 0; i < size * chunkWidth + 2 - breakRoomWidth; ++i)
+        {
             curTilemap.SetTile(new Vector3Int(levelAnchorx + i, levelAnchory + chunkHeight * size + 4), borderTile);
         }
         ++levelAnchorx;
