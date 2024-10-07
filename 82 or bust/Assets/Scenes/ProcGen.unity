@@ -20328,6 +20328,7 @@ MonoBehaviour:
   nanobot: {fileID: 6490564406242932604, guid: e2d82c87a67f89c4295760cd4763555a, type: 3}
   curTilemap: {fileID: 1168133197}
   borderTile: {fileID: 11400000, guid: a4f1e72ce6d14c54083e8ae4f4a0a64c, type: 2}
+  altTile: {fileID: 11400000, guid: aaeda6c3d8da33843ac22cd0ece318de, type: 2}
   navMeshPrefab: {fileID: 7396198255192271618, guid: 863e560ee60d6ff4199562b324dee89f, type: 3}
   breakRoomPrefab: {fileID: 7911542684392735676, guid: 502ce417a0a87f840921017c47b6bb62, type: 3}
   breakRoomWidth: 10
