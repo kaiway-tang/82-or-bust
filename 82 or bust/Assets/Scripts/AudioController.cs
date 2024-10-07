@@ -91,6 +91,11 @@ public class AudioController : MonoBehaviour
         restbgm.volume = 1 - fightBGMVolume; 
     }
 
+    public void PlayLowpassOneShot()
+    {
+        StartCoroutine(LowpassFadeIn());
+    }
+
     IEnumerator LowpassFadeIn()
     {
         float freq = lowpassFrequency;

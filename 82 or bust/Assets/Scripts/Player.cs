@@ -162,6 +162,7 @@ public class Player : MobileEntity
         fxController.PlayPDodgeFX();
         AddMana(500);
         AudioController.Instance.PlayPDodgeSound();
+        AudioController.Instance.PlayLowpassOneShot();
     }
 
     IEnumerator HandleDodgeFX()
@@ -314,6 +315,7 @@ public class Player : MobileEntity
         if (result == DEAD)
         {
             baseObj.SetActive(false);
+            GameManager.self.EndGame();
         }
 
         return result;

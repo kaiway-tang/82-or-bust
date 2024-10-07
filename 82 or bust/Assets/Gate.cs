@@ -59,7 +59,8 @@ public class Gate : MonoBehaviour
             else
             {
                 LevelGenerator.Instance.GenerateLevel(3);
-            }            
+            }
+            AudioController.Instance.SetLowPassCutoffFrequency(3000f);
             Close();
         }
     }
