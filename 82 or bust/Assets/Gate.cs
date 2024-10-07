@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Gate : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class Gate : MonoBehaviour
     int state = 0;
     const int CLOSED = 0, OPEN = 1, CLOSING = 2, OPENING = 3;
     public Transform trfm;
+    [SerializeField] bool isTutorialGate;
     // Start is called before the first frame update
     void Awake()
     {
@@ -48,10 +50,23 @@ public class Gate : MonoBehaviour
 
         if (state == OPEN && Player.self.trfm.position.y > trfm.position.y + 1)
         {
-            Player.self.AddYVelocity(999, 40);
-            LevelGenerator.Instance.GenerateLevel(3);
+            Player.self.AddYVelocity(999, 20);
+            if (isTutorialGate)
+            {
+                CameraManager.FadeBlack(1);
+                Invoke("LoadProcGen", 1.5f);
+            }
+            else
+            {
+                LevelGenerator.Instance.GenerateLevel(3);
+            }            
             Close();
         }
+    }
+
+    void LoadProcGen()
+    {
+        SceneManager.LoadScene("ProcGen");
     }
 
     public void Open()

@@ -20219,6 +20219,7 @@ MonoBehaviour:
   - {fileID: 814296531419774108, guid: d3e45c530486f014fa10c1695670159f, type: 3}
   - {fileID: 5667278724523582868, guid: fa06d694300251748b0284399184979a, type: 3}
   - {fileID: 1564970704707622062, guid: 471200ece2d3eee40bd9c8e010afcc78, type: 3}
+  nanobot: {fileID: 0}
   curTilemap: {fileID: 1168133197}
   borderTile: {fileID: 11400000, guid: a4f1e72ce6d14c54083e8ae4f4a0a64c, type: 2}
   navMeshPrefab: {fileID: 7396198255192271618, guid: 863e560ee60d6ff4199562b324dee89f, type: 3}
@@ -20485,11 +20486,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8982719003818690574, guid: 2201f553d13671b4dbfad1fe7ee67530, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -15.7
+      value: -7.11
       objectReference: {fileID: 0}
     - target: {fileID: 8982719003818690574, guid: 2201f553d13671b4dbfad1fe7ee67530, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.57
+      value: 3.05
       objectReference: {fileID: 0}
     - target: {fileID: 8982719003818690574, guid: 2201f553d13671b4dbfad1fe7ee67530, type: 3}
       propertyPath: m_LocalPosition.z

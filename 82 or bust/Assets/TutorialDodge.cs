@@ -20,30 +20,35 @@ public class TutorialDodge : MonoBehaviour
         {
             if (waitForRClick)
             {
+                Player.self.mana = 300;
+                rocket.GetComponent<Rocket>().speed = 0;
                 if (Input.GetMouseButton(1))
                 {
+                    rocket.GetComponent<Rocket>().speed = 0.15f;
+                    mouseIndicator.SetActive(false);
                     Player.self.movementLock--;
-                    Player.self.AddMana(9999);
-                    Player.self.DashRollCast();
+                    waitForRClick = false;
+                    timer = 1000;
                 }
             }
-            else
+            else if (timer < 999)
             {
                 Player.self.AddMana(-100);
                 timer++;
                 if (Vector3.Distance(Player.self.trfm.position, rocket.transform.position) < 1)
                 {
                     rocket.GetComponent<Rocket>().speed = 0;
+                    mouseIndicator.SetActive(true);
                     waitForRClick = true;
                 }
             }
         }
-    }
-
-    private void OnTriggerEnter2D(Collider2D col)
-    {
-        Player.self.movementLock++;
-        Player.self.AddMana(-9999);
-        rocket.SetActive(true);
+        else if (Player.self.transform.position.x > transform.position.x)
+        {
+            Player.self.movementLock++;
+            Player.self.AddMana(-9999);
+            rocket.SetActive(true);
+            timer = 1;
+        }
     }
 }

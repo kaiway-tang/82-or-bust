@@ -12,7 +12,7 @@ public class Player : MobileEntity
     [SerializeField] float jumpPower, doubleJumpPower;
     bool hasDJump;
 
-    int mana; float maxMana;
+    public int mana; float maxMana;
     [SerializeField] int dashPower, dashMovementDuration, dashIFrameDuration, dashExitVelocity;
     [SerializeField] int dslashPower, dslashMovementDuration, dslashIFrameDuration, dslashExitVelocity;
     [SerializeField] float dslashVertFactor;
@@ -109,6 +109,7 @@ public class Player : MobileEntity
 
     void HandleJump()
     {
+        if (movementLock > 0) { return; }
         if (In.JumpPressed())
         {
             if (IsTouchingGround())

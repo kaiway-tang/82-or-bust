@@ -268,7 +268,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a7417ff32858934e988e6b5279e3e8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextKey: {fileID: 0}
   lGate: {fileID: 6214343082039710985}
   rGate: {fileID: 6214343082680200717}
   animationTicks: 15
-  moveRate: 0.1
+  moveRate: 0.2
+  trfm: {fileID: 0}
+  isTutorialGate: 0

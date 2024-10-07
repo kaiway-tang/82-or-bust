@@ -11719,6 +11719,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _exclamation: {fileID: 3090734774056455368, guid: 4975efaa2b8406a4fa539c0bd84b9583, type: 3}
+  difficulty: 1
 --- !u!114 &2021531033
 MonoBehaviour:
   m_ObjectHideFlags: 0
