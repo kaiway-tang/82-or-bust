@@ -9935,7 +9935,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8135339334117911066
 Transform:
   m_ObjectHideFlags: 0
@@ -10019,7 +10019,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6810384577037627835
 Transform:
   m_ObjectHideFlags: 0
@@ -10237,7 +10237,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8558088761830958875
 Transform:
   m_ObjectHideFlags: 0
@@ -10405,7 +10405,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6596482863312194729
 Transform:
   m_ObjectHideFlags: 0
@@ -10917,7 +10917,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &9119819894214825403
 Transform:
   m_ObjectHideFlags: 0
@@ -11328,6 +11328,7 @@ MonoBehaviour:
   maxSpeed: 9
   jumpPower: 20
   doubleJumpPower: 16
+  mana: 0
   dashPower: 40
   dashMovementDuration: 9
   dashIFrameDuration: 20
@@ -11719,7 +11720,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _exclamation: {fileID: 3090734774056455368, guid: 4975efaa2b8406a4fa539c0bd84b9583, type: 3}
+  EndUI: {fileID: 0}
   difficulty: 1
+  score: 0
 --- !u!114 &2021531033
 MonoBehaviour:
   m_ObjectHideFlags: 0

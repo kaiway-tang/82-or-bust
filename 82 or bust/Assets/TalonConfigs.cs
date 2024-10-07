@@ -23,7 +23,7 @@ public class TalonConfigs : MonoBehaviour
         rightTalon.rotation = rTalonDodgeStart.rotation;
         talonConfigs.up = mouseVect;
 
-        dodgeTmr = 15;
+        dodgeTmr = 0;
     }
 
     int dodgeTmr;

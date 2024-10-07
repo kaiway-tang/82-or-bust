@@ -51,6 +51,7 @@ MonoBehaviour:
   state: 0
   collectSpeed: 0.2
   breakWall: {fileID: 0}
+  ringRend: {fileID: 6317290743284126449}
 --- !u!1 &7880586929729160382
 GameObject:
   m_ObjectHideFlags: 0
@@ -125,7 +126,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1f5f7bc303e96444bbe51c31f08ce873, type: 3}
-  m_Color: {r: 1, g: 0.9454185, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.9454185, b: 0, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

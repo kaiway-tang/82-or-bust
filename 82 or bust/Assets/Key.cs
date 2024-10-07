@@ -48,16 +48,23 @@ public class Key : MonoBehaviour
             {
                 state = COLLECTING;
             }
-            if (curCap > 0) { curCap--; }
+            if (curCap > 0)
+            {
+                curCap--;
+                Tools.SetAlpha(ringRend, (float)(curCap) / reqCap);
+                ringRend.transform.localScale = Vector3.one * (1-(float)(curCap) / reqCap);
+            }
         }
         if (state == COLLECTING)
         {
-            if (Tools.BoxDist(trfm.position, Player.self.trfm.position) < 2)
+            if (Tools.BoxDist(trfm.position, Player.self.trfm.position) > 2)
             {
                 state = IDLE;
             }
             curCap++;
-            if (curCap >= reqCap) { state = UNLOCKING; }
+            Tools.SetAlpha(ringRend, (float)(curCap) / reqCap);
+            ringRend.transform.localScale = Vector3.one * (1 - (float)(curCap) / reqCap);
+            if (curCap >= reqCap) { state = UNLOCKING;}
         }
         if (state == UNLOCKING)
         {
