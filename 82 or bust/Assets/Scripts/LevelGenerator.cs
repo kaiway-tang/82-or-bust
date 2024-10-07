@@ -124,19 +124,19 @@ public class LevelGenerator : MonoBehaviour
         // Generate border
         for (int j = 0; j < size * chunkHeight + 5; ++j)
         {
-            curTilemap.SetTile(new Vector3Int(levelAnchorx + chunkWidth * size + 1, levelAnchory + j), altTile);
+            curTilemap.SetTile(new Vector3Int(levelAnchorx + chunkWidth * size + 1, levelAnchory + j), borderTile);
         }
         for (int j = breakRoomHeight; j < size * chunkHeight + 5; ++j)
         {
-            curTilemap.SetTile(new Vector3Int(levelAnchorx, levelAnchory + j), altTile);
+            curTilemap.SetTile(new Vector3Int(levelAnchorx, levelAnchory + j), borderTile);
         }
         for (int i = 0; i < size * chunkWidth + 2; ++i)
         {
-            curTilemap.SetTile(new Vector3Int(levelAnchorx + i, levelAnchory), altTile);
+            curTilemap.SetTile(new Vector3Int(levelAnchorx + i, levelAnchory), borderTile);
         }
         for (int i = 0; i < size * chunkWidth + 2 - breakRoomWidth; ++i)
         {
-            curTilemap.SetTile(new Vector3Int(levelAnchorx + i, levelAnchory + chunkHeight * size + 4), altTile);
+            curTilemap.SetTile(new Vector3Int(levelAnchorx + i, levelAnchory + chunkHeight * size + 4), borderTile);
         }
         ++levelAnchorx;
         ++levelAnchory;
