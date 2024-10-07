@@ -7034,6 +7034,8 @@ MonoBehaviour:
   borderTile: {fileID: 0}
   navMeshPrefab: {fileID: 7396198255192271618, guid: 863e560ee60d6ff4199562b324dee89f, type: 3}
   breakRoomPrefab: {fileID: 0}
+  breakRoomWidth: 10
+  breakRoomHeight: 10
   chunkWidth: 30
   chunkHeight: 20
 --- !u!114 &1869534336

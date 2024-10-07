@@ -46,6 +46,7 @@ public class Gate : MonoBehaviour
 
         if (state == OPEN && Player.self.trfm.position.y > transform.position.y)
         {
+            LevelGenerator.Instance.GenerateLevel(3);
             Close();
         }
     }

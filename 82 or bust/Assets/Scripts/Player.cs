@@ -18,6 +18,7 @@ public class Player : MobileEntity
     [SerializeField] float dslashVertFactor;
     [SerializeField] Hitbox dslashHitbox;
     [SerializeField] GameObject perfectDodgeObj;
+    [SerializeField] PlayerEffectsController fxController;
 
     [SerializeField] Scaler manaScaler;
     [SerializeField] Collider2D hurtbox;
@@ -211,6 +212,8 @@ public class Player : MobileEntity
             dslashHitbox.Activate(dslashMovementTmr);
             dslashHitbox.trfm.right = rb.velocity;
 
+            fxController.PlayDSlashFX();
+
             AddMana(-500);
         }
     }
@@ -253,6 +256,8 @@ public class Player : MobileEntity
             rb.velocity = (mousePos - trfm.position) * factor * dashPower;
 
             Instantiate(perfectDodgeObj, trfm.position, Quaternion.identity);
+
+            fxController.PlayDodgeFX();
 
             AddMana(-300);
         }
