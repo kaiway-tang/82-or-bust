@@ -1482,8 +1482,7 @@ MonoBehaviour:
   - {fileID: 1561795849283117994}
   - {fileID: 2690493138527004180}
   - {fileID: 6538998072759898727}
-  bridges:
-  - {fileID: 1925822491223631812}
+  bridges: []
 --- !u!1 &7967659132802227517
 GameObject:
   m_ObjectHideFlags: 0
@@ -2320,17 +2319,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5953682663290503805, guid: d3e45c530486f014fa10c1695670159f, type: 3}
   m_PrefabInstance: {fileID: 4814782173955269175}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1925822491223631812 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6370464520467056115, guid: d3e45c530486f014fa10c1695670159f, type: 3}
-  m_PrefabInstance: {fileID: 4814782173955269175}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb1f2cbe9d494844e874625399ea60ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &8055751690649846776
 PrefabInstance:
   m_ObjectHideFlags: 0

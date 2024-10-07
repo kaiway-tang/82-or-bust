@@ -63,7 +63,7 @@ Transform:
   m_Children:
   - {fileID: 3972305638574351038}
   m_Father: {fileID: 222759779699874984}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8309790196543838399
 SpriteRenderer:
@@ -138,6 +138,7 @@ MonoBehaviour:
   aimRate: 0.1
   playerVisible: 0
   telegraphed: 0
+  fireTmr: 0
   rocket: {fileID: 8124404488934734147, guid: d80f6964203f1e94da35bb3914d634dd, type: 3}
 --- !u!1001 &5775736350630127778
 PrefabInstance:
@@ -198,6 +199,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6688200708873479689, guid: eac73961e5282854d89e1c71107d32e5, type: 3}
+      propertyPath: armament
+      value: 
+      objectReference: {fileID: 6507689058798234286}
     - target: {fileID: 7366692797313721115, guid: eac73961e5282854d89e1c71107d32e5, type: 3}
       propertyPath: armament
       value: 

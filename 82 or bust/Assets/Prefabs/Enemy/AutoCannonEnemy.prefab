@@ -54,6 +54,7 @@ MonoBehaviour:
   aimRate: 0.1
   playerVisible: 0
   telegraphed: 0
+  fireTmr: 0
   bullet: {fileID: 4213405564715042583, guid: 4b9bbc8f5bcf1204ba828f84a83086fc, type: 3}
   aimLine: {fileID: 6171682107952408461}
 --- !u!1 &2815966690844420686
@@ -266,7 +267,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5994554209245066248, guid: eac73961e5282854d89e1c71107d32e5, type: 3}
       propertyPath: m_Name
-      value: AutoCannonEnemy Variant
+      value: AutoCannonEnemy
       objectReference: {fileID: 0}
     - target: {fileID: 5994554209245066250, guid: eac73961e5282854d89e1c71107d32e5, type: 3}
       propertyPath: m_RootOrder
@@ -312,6 +313,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6688200708873479689, guid: eac73961e5282854d89e1c71107d32e5, type: 3}
+      propertyPath: armament
+      value: 
+      objectReference: {fileID: 3834298547359760234}
     - target: {fileID: 7366692797313721115, guid: eac73961e5282854d89e1c71107d32e5, type: 3}
       propertyPath: armament
       value: 

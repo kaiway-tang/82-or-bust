@@ -14,6 +14,8 @@ public class Locomotor : MobileEntity
     Vector3 lastTargetPos;
     [SerializeField] int warpCD, disengagedTimer;
 
+    [SerializeField] Armament armament;
+
     [SerializeField] int state;
     const int ROAMING = 0, ENGAGED = 1, DISENGAGED = 2, WARPING = 3;
     // Start is called before the first frame update
@@ -83,7 +85,7 @@ public class Locomotor : MobileEntity
             {
                 if (!ledged) { AddForwardXVelocity(accl, maxSpeed); }
             }
-            else
+            else if (!armament.telegraphed && armament.fireTmr < 1)
             {
                 disengagedTimer = 150;
                 state = DISENGAGED;
@@ -126,6 +128,7 @@ public class Locomotor : MobileEntity
         warpObj.gameObject.SetActive(true);
         warpObj.Activate();
         state = WARPING;
+        baseObj.SetActive(false);
     }
 
     int warpTimer;
@@ -140,10 +143,12 @@ public class Locomotor : MobileEntity
     public void EndWarp()
     {
         if (!trfm) { return; }
+
         vect3 = warpObj.trfm.position;
         vect3.z = 0;
         trfm.position = vect3;
 
+        baseObj.SetActive(true);
         state = ROAMING;
         warpCD = 100;
     }

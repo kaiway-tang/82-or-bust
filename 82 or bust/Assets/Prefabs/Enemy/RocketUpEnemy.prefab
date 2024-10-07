@@ -86,6 +86,7 @@ MonoBehaviour:
   aimRate: 0
   playerVisible: 0
   telegraphed: 0
+  fireTmr: 0
   rocket: {fileID: 8124404488934734147, guid: d80f6964203f1e94da35bb3914d634dd, type: 3}
 --- !u!212 &7140325524112309324
 SpriteRenderer:
@@ -194,6 +195,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6688200708873479689, guid: eac73961e5282854d89e1c71107d32e5, type: 3}
+      propertyPath: armament
+      value: 
+      objectReference: {fileID: 4970192479108586172}
     - target: {fileID: 7366692797313721115, guid: eac73961e5282854d89e1c71107d32e5, type: 3}
       propertyPath: armament
       value: 

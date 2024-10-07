@@ -25,7 +25,7 @@ public class WarpObj : MonoBehaviour
     private void FixedUpdate()
     {
         agent.SetDestination(Player.self.trfm.position);
-        if ((Player.self.trfm.position - trfm.position).sqrMagnitude < 4)
+        if (Tools.BoxDist(trfm.position, Player.self.trfm.position) < 2)
         {
             EndWarp();
         }

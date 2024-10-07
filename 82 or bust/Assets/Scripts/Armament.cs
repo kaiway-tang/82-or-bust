@@ -54,7 +54,7 @@ public class Armament : MonoBehaviour
         Tools.FacePosition(trfm, Player.self.trfm.position, aimRate);
     }
 
-    protected int fireTmr;
+    public int fireTmr;
     protected virtual void Fire()
     {
         telegraphed = false;

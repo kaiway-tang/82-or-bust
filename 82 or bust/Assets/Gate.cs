@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class Gate : MonoBehaviour
 {
+    [SerializeField] Key nextKey;
     [SerializeField] Transform lGate, rGate;
     [SerializeField] int animationTicks;
     [SerializeField] float moveRate;
     int state = 0;
     const int CLOSED = 0, OPEN = 1, CLOSING = 2, OPENING = 3;
+    public Transform trfm;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        trfm = transform;
     }
 
     private void Update()
@@ -44,9 +46,9 @@ public class Gate : MonoBehaviour
             }
         }
 
-        if (state == OPEN && Player.self.trfm.position.y > transform.position.y)
+        if (state == OPEN && Player.self.trfm.position.y > trfm.position.y)
         {
-            LevelGenerator.Instance.GenerateLevel(3);
+            nextKey.gate = LevelGenerator.Instance.GenerateLevel(3).gate;
             Close();
         }
     }

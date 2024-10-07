@@ -46,7 +46,7 @@ public class LevelGenerator : MonoBehaviour
         startChunks = new List<GameObject>();
         endChunks = new List<GameObject>();
         LoadChunks();
-        GenerateLevel(3);
+        GenerateLevel(2);
     }
 
     void LoadChunks()
@@ -109,7 +109,7 @@ public class LevelGenerator : MonoBehaviour
         }
     }
 
-    public void GenerateLevel(int size)
+    public Breakroom GenerateLevel(int size)
     {
         ClearGeneration();
         // Generate border
@@ -158,6 +158,7 @@ public class LevelGenerator : MonoBehaviour
         // Spawn break room
         // if (breakRoomObj) Destroy(breakRoomObj);  // Note: we don't want to delete break rooms like other stuff
         breakRoomObj = Instantiate(breakRoomPrefab, new Vector3(levelAnchorx, levelAnchory), Quaternion.identity);
+        return breakRoomObj.GetComponent<Breakroom>();
     }
 
     void GenerateCell(int anchorx, int anchory, int requirement = 0)
