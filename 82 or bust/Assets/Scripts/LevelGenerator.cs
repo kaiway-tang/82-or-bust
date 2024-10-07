@@ -29,6 +29,7 @@ public class LevelGenerator : MonoBehaviour
     int levelAnchory = 0;
 
     public static LevelGenerator Instance;
+    public List<Vector3> SpawnPositions;
 
     private void Awake()
     {
@@ -45,6 +46,7 @@ public class LevelGenerator : MonoBehaviour
         chunks = new List<GameObject>();
         startChunks = new List<GameObject>();
         endChunks = new List<GameObject>();
+        SpawnPositions = new List<Vector3>();
         LoadChunks();
         GenerateLevel(2);
     }
@@ -91,6 +93,7 @@ public class LevelGenerator : MonoBehaviour
         {
             if (Random.Range(0, chunk.spawnNodes.Count) < 3)
             { Instantiate(enemies[Random.Range(0, enemies.Length)], anchor + chunk.spawnNodes[j].transform.localPosition, Quaternion.identity); }
+            SpawnPositions.Add(anchor + chunk.spawnNodes[j].transform.localPosition);
             // Destroy(chunk.spawnNodes[j].gameObject);
         }
 
@@ -206,5 +209,6 @@ public class LevelGenerator : MonoBehaviour
     void ClearGeneration()
     {
         curTilemap.ClearAllTiles();
+        SpawnPositions.Clear(); 
     }
 }
