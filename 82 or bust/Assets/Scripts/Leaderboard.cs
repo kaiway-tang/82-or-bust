@@ -24,12 +24,13 @@ public class Leaderboard : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SendResults("testnAMe", 70);
+        // SendResults("testnAMe", 70);
     }
 
     private void OnEnable()
     {
         StartCoroutine(GetRequest());
+        finalScore.text = GameManager.self.score.ToString();
     }
 
     // Update is called once per frame
@@ -90,7 +91,7 @@ public class Leaderboard : MonoBehaviour
 
     public void SubmitName()
     {
-        SendResults(nameInput.text, 0);
+        SendResults(nameInput.text, GameManager.self.score);
     }
 
     public void SendResults(string name, int score)

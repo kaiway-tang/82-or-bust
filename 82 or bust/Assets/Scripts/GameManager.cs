@@ -15,7 +15,9 @@ public class GameManager : MonoBehaviour
     public static Transform playerTrfm;
     public static PosTracker playerPosTracker;
 
-    public int difficulty = 1;
+    public int difficulty = 0;
+
+    public int score = 0;
 
     private void Awake()
     {
@@ -70,7 +72,8 @@ public class GameManager : MonoBehaviour
         assignID = 0;
         inSloMo = false;
         Time.timeScale = 1;
-        difficulty = 1;
+        difficulty = 0;
+        score = 0;
         SceneManager.LoadScene("ProcGen");
     }
 }

@@ -51,6 +51,7 @@ public class Gate : MonoBehaviour
             Player.self.AddYVelocity(999, 40);
             LevelGenerator.Instance.GenerateLevel(3);
             AudioController.Instance.SetLowPassCutoffFrequency(3000f);
+            GameManager.self.score += 1000;
             Close();
         }
     }

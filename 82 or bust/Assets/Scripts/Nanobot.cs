@@ -13,6 +13,9 @@ public class Nanobot : MobileEntity
     [SerializeField] Transform target;
 
     [SerializeField] int state = 0;
+
+    [SerializeField] int score = 10;
+
     const int SCATTERING = 0, SEEKING = 1, TRANSITION = 2;
 
     int life;
@@ -232,6 +235,7 @@ public class Nanobot : MobileEntity
             if (result == HPEntity.DEAD)
             {
                 CameraManager.SetTrauma(damageTrauma);
+                GameManager.self.score += score;
                 Destroy(baseObj);
             }
             else
