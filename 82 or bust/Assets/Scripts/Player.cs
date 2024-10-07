@@ -314,6 +314,7 @@ public class Player : MobileEntity
         if (result == DEAD)
         {
             baseObj.SetActive(false);
+            GameManager.self.EndGame();
         }
 
         return result;

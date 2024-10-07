@@ -16,6 +16,7 @@ public class BreakInWall : HPEntity
             CameraManager.SetTrauma(trauma);
             if (result == HPEntity.DEAD)
             {
+                AudioController.Instance.SetLowPassCutoffFrequency(22000f);
                 Destroy(baseObj);
             }
         }

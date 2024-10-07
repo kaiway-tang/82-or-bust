@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject _exclamation;
     public static GameObject exclamation;
+    [SerializeField] GameObject EndUI;
 
     static int assignID;
     public static GameManager self;
@@ -59,11 +60,17 @@ public class GameManager : MonoBehaviour
         Time.timeScale = percentage;
     }
 
+    public void EndGame()
+    {
+        EndUI.SetActive(true);
+    }
+
     public void Restart()
     {
         assignID = 0;
         inSloMo = false;
         Time.timeScale = 1;
         difficulty = 1;
+        SceneManager.LoadScene("ProcGen");
     }
 }
