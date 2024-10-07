@@ -5,11 +5,26 @@ using UnityEngine;
 public class PlayerEffectsController : MonoBehaviour
 {
     [SerializeField] ParticleSystem dodgeFX;
+    [SerializeField] GameObject dodgeRingFX, pDodgeFX;
     [SerializeField] TrailRenderer dslashTrail;
-    
+
+    [SerializeReference] Transform mousePtr;
+    Transform trfm;
+
+    [SerializeField] TalonConfigs talons;
+
     public void PlayDodgeFX()
     {
         dodgeFX.Play();
+        Vector3 mouseVect = CursorObj.trfm.position - trfm.position;
+        mousePtr.up = mouseVect;
+        Instantiate(dodgeRingFX, trfm.position + mouseVect.normalized * -0.2f, trfm.rotation).transform.up = mouseVect;
+        talons.SetDodgeTalons();
+    }
+
+    public void PlayPDodgeFX()
+    {
+        Instantiate(pDodgeFX, trfm.position, Quaternion.identity);
     }
 
     public void PlayDSlashFX()
@@ -20,10 +35,11 @@ public class PlayerEffectsController : MonoBehaviour
 
     void Start()
     {
-        
+        trfm = transform;
     }
 
     int dslashTmr;
+
     private void FixedUpdate()
     {
         if (dslashTmr > 0)

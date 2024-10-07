@@ -105,7 +105,7 @@ public class CameraManager : MonoBehaviour
 
     static float whiteFadeTarget, blackFadeTarget;
     static float whiteFadeRate, blackFadeRate;
-    static bool whiteFading, blackFading, dmgVigFading;
+    static bool whiteFading, blackFading, dmgVigFading, dodgeVigFading;
     public static void FadeWhite(float target, float rate = 0.02f)
     {
         whiteFadeTarget = target;
@@ -125,7 +125,13 @@ public class CameraManager : MonoBehaviour
         dmgVigFading = true;
     }
 
-    [SerializeField] SpriteRenderer whiteCover, blackCover, dmgVignette;
+    public static void SetDodgeVig(float alpha)
+    {
+        Tools.SetAlpha(self.dodgeVignette, alpha);
+        dodgeVigFading = true;
+    }
+
+    [SerializeField] SpriteRenderer whiteCover, blackCover, dmgVignette, dodgeVignette;
     Color col;
     void HandleFading()
     {
@@ -167,6 +173,15 @@ public class CameraManager : MonoBehaviour
             if (dmgVignette.color.a <= 0)
             {
                 dmgVigFading = false;
+            }
+        }
+
+        if (dodgeVigFading)
+        {
+            Tools.AddAlpha(dodgeVignette, -0.02f);
+            if (dodgeVignette.color.a <= 0)
+            {
+                dodgeVigFading = false;
             }
         }
     }

@@ -9,6 +9,7 @@ public class OnGround : MonoBehaviour
     {
         if (col.gameObject.layer == Layers.TERRAIN || col.gameObject.layer == Layers.HURTBOX)
         {
+            Debug.Log("Touching: " + col.gameObject);
             touchCount++;
         }
     }

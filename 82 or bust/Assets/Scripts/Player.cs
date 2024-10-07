@@ -157,6 +157,8 @@ public class Player : MobileEntity
     public void PerfectDodged()
     {
         GameManager.SetSloMo(0.4f);
+        CameraManager.SetDodgeVig(.15f);
+        fxController.PlayPDodgeFX();
         AddMana(500);
     }
 

@@ -282,6 +282,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5994554209245066250}
     m_Modifications:
+    - target: {fileID: 506302180424981864, guid: ef9a268dea3df8b4d86f9ce9572c82d9, type: 3}
+      propertyPath: m_Speed
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 506302180424981864, guid: ef9a268dea3df8b4d86f9ce9572c82d9, type: 3}
+      propertyPath: m_Radius
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 506302181847090129, guid: ef9a268dea3df8b4d86f9ce9572c82d9, type: 3}
       propertyPath: m_Name
       value: Locomotor
