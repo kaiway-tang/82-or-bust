@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
         }
         set
         {
-            if (!playerDead) score = value;
+            if (!playerDead) _score = value;
         }
     }
 
