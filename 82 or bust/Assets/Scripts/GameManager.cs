@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         self = GetComponent<GameManager>();
+        playerDead = false;
     }
 
     private void Update()
@@ -86,6 +87,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         difficulty = 0;
         score = 0;
+        playerDead = false;
         SceneManager.LoadScene("ProcGen");
     }
 }
