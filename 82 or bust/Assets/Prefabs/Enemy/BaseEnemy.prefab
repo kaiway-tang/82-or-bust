@@ -219,7 +219,7 @@ MonoBehaviour:
   damageTrauma: 0
   deathTrauma: 0
   inactiveShell: {fileID: 3561486764205098216, guid: 6a531084636f678449cad121e8471e20, type: 3}
-  score: 100
+  score: 50
 --- !u!1 &5994554209245066248
 GameObject:
   m_ObjectHideFlags: 0

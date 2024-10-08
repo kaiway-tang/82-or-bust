@@ -318,10 +318,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3834298547359760234}
     - target: {fileID: 7366692797313721115, guid: eac73961e5282854d89e1c71107d32e5, type: 3}
-      propertyPath: score
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 7366692797313721115, guid: eac73961e5282854d89e1c71107d32e5, type: 3}
       propertyPath: armament
       value: 
       objectReference: {fileID: 3834298547359760234}
